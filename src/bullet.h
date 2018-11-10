@@ -3,6 +3,6 @@
 
 #include "structs.h"
 
-struct entity *shot_bullet(struct map *map, struct entity *player);
+void shot_bullet(struct map *map, struct entity *player);
 
 #endif /* !BULLET_H_ */
