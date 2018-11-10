@@ -21,5 +21,6 @@ struct map
 };
 
 struct map parse_map(char *path);
+int get_size(char *path);
 
 #endif /* !MAP_H_ */

@@ -3,7 +3,8 @@
 struct map parse_map(char *path)
 {
     struct map map;
-    map.block = malloc(map.weight * map.height * sizeof(char));
+    int size = get_size(path);
+    map.block = malloc(size * sizeof(char));
     FILE *file;
     file = fopen(path, "r");
     char c;
@@ -21,7 +22,20 @@ struct map parse_map(char *path)
         else
             map.block[i] = AIR;
     }
-    i++;
-    map.block[i] = '\0';
+    fclose(file);
     return map;
+}
+
+int get_size(char *path)
+{
+    FILE *file;
+    file = fopen(path, "r");
+    int count = 0;
+    char c;
+    for (c = fgetc(file); c != EOF; c = fgetc(file))
+    {
+        count++;
+    }
+    fclose(file);
+    return count;
 }
