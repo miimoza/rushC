@@ -15,7 +15,7 @@ enum blocktype
 struct map
 {
     char *texture_path;
-    int weight;
+    int width;
     int height;
     enum blocktype *block;
 };
