@@ -109,11 +109,6 @@ struct map **parse_maps(char **path, int size, char **texture_path)
 
 }
 
-int fti(float x)
-{
-    return x;
-}
-
 enum blocktype get_block(struct map *map, struct vector2 vec)
 {
     printf("x of block: %f %d, y of block: %f %d\n",
