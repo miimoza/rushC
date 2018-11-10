@@ -41,25 +41,29 @@ void display_blk(struct display *display, enum blocktype blocktype, int x, int y
     SDL_RenderCopy(renderer, texture, NULL, &texr);
 }
 
-/*
-void display_entity(struct display *display, struct entity *entity)
+
+void display_entity(struct display *display, struct entity entity)
 {
 
-    SDL_Texture *texture = display->ent_textures[entity->type];
+    SDL_Texture *texture = display->ent_textures[entity.type];
     SDL_Renderer *renderer = display->renderer;
 
+    float fposx =  entity.pos.x * BLOCK_SIZE;
+    float fposy =  entity.pos.y * BLOCK_SIZE;
+    int posx = fposx;
+    int posy = fposy;
     SDL_Rect texr =
     {
-        .x = entity->pos.x,
-        .y = entity->pos.y,
-        .w = entity->size.w,
-        .h = entity->size.h,
+        .x = posx,
+        .y = posy,
+        .w = BLOCK_SIZE,
+        .h = BLOCK_SIZE,
     };
 
-    SDL_QueryTexture(texture, NULL, NULL, &entity->pos.x, &entity->pos.y);
+    SDL_QueryTexture(texture, NULL, NULL, &posx, &posy);
     SDL_RenderCopy(renderer, texture, NULL, &texr);
 }
-*/
+
 /*
 void render_frame(struct GameContext game)
 {
@@ -198,6 +202,13 @@ void display_map(struct display *display, struct map *map)
             enum blocktype blocktype = map->block[y * map->width + x];
             display_blk(display, blocktype, x * BLOCK_SIZE, y * BLOCK_SIZE);
         }
+    }
+
+    for(int entity_i = 0; entity_i < map->nbentities; entity_i++)
+    {
+        struct entity entity = map->entities[entity_i];
+        printf("entity : x: %f y: %f\n", entity.pos.x, entity.pos.y);
+        display_entity(display, entity);
     }
 
     SDL_RenderPresent(display->renderer);

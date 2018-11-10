@@ -6,7 +6,7 @@
 #include "map.h"
 //#include "entity.h"
 
-#define BLOCK_SIZE 16
+#define BLOCK_SIZE 64
 
 struct display
 {
