@@ -29,7 +29,7 @@ int get_height(char *path)
     return count;
 }
 
-struct map parse_map(char *path)
+struct map *parse_map(char *path)
 {
     struct map map;
     map.width = get_width(path);
@@ -57,7 +57,7 @@ struct map parse_map(char *path)
     return map;
 }
 
-char *parse(char **path, int size)
+struct map **parse_maps(char **path, int size)
 {
     char *array_map = malloc(size * sizeof(char *));
     int i = 0;

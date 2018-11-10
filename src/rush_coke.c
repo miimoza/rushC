@@ -1,6 +1,8 @@
-#include <SDL.h>
 #include <stdio.h>
 
+#include "map.h"
+#include "game.h"
+#include "display.h"
 
 int main(int argc, char** argv)
 {

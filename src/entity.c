@@ -35,10 +35,10 @@ void apply_gravity(struct entity *entity, float delta)
         0,
         GRAVITY_FORCE
     };
-    entity->acc = add_vect(entity.acc, scale_vect(delta, gravity));
+    entity->acc = add_vect(entity->acc, scale_vect(delta, gravity));
 }
 
-int is_on_floor(struct entity entity, struct map map)
+int is_on_floor(struct entity *entity, struct map *map)
 {
     struct vector2 gravity_orientation =
     {
@@ -46,20 +46,20 @@ int is_on_floor(struct entity entity, struct map map)
         1
     };
     enum blocktype block =
-        get_block(map, add_vect(entity.pos, gravity_orientation);
+        get_block(map, add_vect(entity->pos, gravity_orientation);
     if (block == AIR || block == SPIKE)
             return 0;
     return 1;
 }
 
-void jump(struct entity entity, float delta)
+void jump(struct entity *entity, float delta)
 {
     struct vector2 =
     {
         0,
         JUMP_FORCE
     };
-    entity.acc = add_vect(entity.spd, scale_vect(delta, vector2));
+    entity->spd = add_vect(entity->spd, scale_vect(delta, vector2));
 
 }
 

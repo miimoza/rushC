@@ -1,15 +1,23 @@
+#include "SDL.h"
+#include "map.h"
+#include "display.h"
+
 struct GameContext init_game()
 {
-    struct GameContext game;
-    game.map_index = 0
-    game.maps = parse_maps();
-    game.map = game.maps[game.map_index];
-    game.display = init_display();
-    game.display = load_textures(map.texture_path);
+    struct GameContext game; // = malloc(sizeof(struct GameContext));
+    game.maps = parse_maps(&game.nb_maps);
+    game.map = game.maps[game.cur_map];
+
+    game.is_playing = 1;
+    game.cur_map = 0;
+
+    game.display = init_display(game.map->width, game.map->height);
+    load_textures(game.display, game.map->texture_path);
+
     return game;
 }
 
 void end_game(struct GameContext game)
 {
-     end_display(game.dislay);
+     end_display(game.display);
 }

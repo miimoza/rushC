@@ -24,8 +24,8 @@ struct entity
 };
 
 void update_entity(struct entity *entity, float delta);
-void apply_gravity(struct entity entity, float delta);
-int is_on_floor(struct entity entity, struct map map);
-void jump(struct entity entity, float delta);
+void apply_gravity(struct entity *entity, float delta);
+int is_on_floor(struct entity *entity, struct map *map);
+void jump(struct entity *entity, float delta);
 
 #endif /* !ENTITY_H_ */
