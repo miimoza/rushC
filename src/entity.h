@@ -4,7 +4,6 @@
 #define GRAVITY_FORCE 0.0025
 #define JUMP_FORCE 0.25
 
-#define NB_ENT_TYPES 5
 
 #include "structs.h"
 
@@ -13,5 +12,6 @@ void update_entity(struct entity *entity, float delta, struct map *map);
 void apply_gravity(struct entity *entity, float delta);
 int is_on_floor(struct entity *entity, struct map *map);
 void jump(struct entity *entity, float delta);
+void add_entity(struct map *map, struct entity entity);
 
 #endif /* !ENTITY_H_ */

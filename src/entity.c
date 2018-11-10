@@ -52,3 +52,34 @@ void jump(struct entity *entity, float delta)
     entity->spd = add_vect(entity->spd, scale_vect(delta, jump));
 
 }
+
+void add_entity(struct map *map, struct entity entity)
+{
+    map->entities = realloc(map->entities, map->nbentities + 1);
+    map->entities[map->nbentities++] = entity;
+}
+
+int entities_are_equal(struct entity ent1, struct entity ent2)
+{
+    if(ent1.pos.x != ent2.pos.x)
+        return 0;
+    if(ent1.pos.y != ent2.pos.y)
+        return 0;
+    if(ent1.type != ent2.type)
+        return 0;
+    return 1;
+}
+void delete_entity(struct map *map, struct entity entity)
+{
+    int i = 0;
+    while(i < map->nbentities)
+    {
+        if(entities_are_equal(map->entities[i], entity))
+            break;
+        i++;
+    }
+    for(; i < map->nbentities - 1; i++)
+    {
+        map->entities[i] = map->entities[i+1];
+    }
+}
