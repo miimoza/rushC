@@ -9,7 +9,7 @@ int main(void)
 {
     printf("test\n" );
 
-    struct map *map = parse_map("maps/lvl2.ez", "maps/lvl1_textures/");
+    struct map *map = parse_map("maps/lvl1.ez", "maps/lvl1_textures/");
     struct display *display = init_display(map->width, map->height);
     load_textures(display, map->texture_path);
     //display_map(display, map);
