@@ -103,15 +103,15 @@ struct map *parse_map(char *path, char *texture_path)
             map->block[i] = DBLOCK;
         else if (c == 'p')
         {
-            map->entities[map->nbentities++] = create_entity(PLAYER);
+            map->entities[map->nbentities++] = create_entity(PLAYER, 0, 0);
         }
         else if (c == 'e')
         {
-            map->entities[map->nbentities++] = create_entity(ENEMY);
+            map->entities[map->nbentities++] = create_entity(ENEMY, 0, 0);
         }
         else if (c == 'g')
         {
-            map->entities[map->nbentities++] = create_entity(GUN_PICKUP);
+            map->entities[map->nbentities++] = create_entity(GUN_PICKUP, 0, 0);
         }
         else
             map->block[i] = AIR;
@@ -142,26 +142,29 @@ enum blocktype get_block(struct map *map, struct vector2 vec)
     return map->block[fti(vec.x + 0.5f) + fti(vec.y) * map->width];
 }
 
-struct entity create_entity(enum entitytype)
+struct entity create_entity(enum entitytype type, int x, int y)
 {
-    struct entity *player =
+    struct vector2 vec_pos =
     {
-        entitytype,
-        struct vector2 vec_pos =
-        {
-            get_pos_x(char *path, c),
-            get_pos_y(char *path, c)
-        }
-        struct vector2 vec_spd =
-        {
-            0,
-            0
-        };
-        struct vector2 vec_acc =
-        {
-            0,
-            0
-        }
+        x,
+        y
+    };
+    struct vector2 vec_spd =
+    {
+        0,
+        0
+    };
+    struct vector2 vec_acc =
+    {
+        0,
+        0
+    };
+    struct entity player =
+    {
+        type,
+        vec_pos,
+        vec_spd,
+        vec_acc
     };
     return player;
 }

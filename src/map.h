@@ -35,5 +35,6 @@ int get_pos_y(char *path, char chr);
 struct map **parse_maps(char **path, int size, char **texture_path);
 int fti(float x);
 enum blocktype get_block(struct map *map, struct vector2 vec);
+struct entity create_entity(enum entitytype type, int x, int y);
 
 #endif /* !MAP_H_ */
