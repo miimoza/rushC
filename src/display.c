@@ -3,8 +3,7 @@
 #include <SDL_image.h>
 #include "display.h"
 #include "map.h"
-
-//#include "entity.h"
+#include "entity.h"
 
 struct display *init_display(int width, int height)
 {
@@ -87,24 +86,110 @@ void render_frame(struct GameContext game)
 }
 */
 
-void load_textures(struct display *display, char *textures_path)
+void load_blk_texture(struct display *display, enum blocktype blk_type, char *textures_path)
 {
-    display->blk_textures = malloc(sizeof(SDL_Texture*) * 4);
-    SDL_Texture **blk_textures = display->blk_textures;
-
     char buffer[4096];
     strcpy(buffer, textures_path);
-    strcat(buffer, "block.png");
-    blk_textures[BLOCK] = IMG_LoadTexture(display->renderer, buffer);
-    blk_textures[SPIKE] = IMG_LoadTexture(display->renderer, "maps/lvl1_textures/spike.png");
-    blk_textures[DBLOCK] = IMG_LoadTexture(display->renderer, "maps/lvl1_textures/destructible_block.png");
+
+    switch (blk_type) {
+        case BLOCK:
+            strcat(buffer, "block.png");
+            break;
+        case AIR:
+            return;
+        case SPIKE:
+            strcat(buffer, "spike.png");
+            break;
+        case DBLOCK:
+            strcat(buffer, "destructible_block.png");
+            break;
+    }
+
+    display->blk_textures[blk_type] = IMG_LoadTexture(display->renderer, buffer);
+}
+
+void load_ent_texture(struct display *display, enum entitytype ent_type, char *textures_path)
+{
+    char buffer[4096];
+    strcpy(buffer, textures_path);
+
+    switch (ent_type) {
+        case PLAYER:
+            strcat(buffer, "player.png");
+            break;
+        case ENEMY:
+            strcat(buffer, "enemy.png");
+            break;
+        case BULLET:
+            strcat(buffer, "bullet.png");
+            break;
+        case GUN_PICKUP:
+            strcat(buffer, "gun_pickup.png");
+            break;
+        case DOUBLE_JUMP_PICKUP:
+            strcat(buffer, "double_jump_pickup.png");
+            break;
+    }
+
+    display->ent_textures[ent_type] = IMG_LoadTexture(display->renderer, buffer);
+}
+
+void load_background(struct display *display, char *textures_path)
+{
+    char buffer[4096];
+    strcpy(buffer, textures_path);
+    strcat(buffer, "background.png");
+    display->background = IMG_LoadTexture(display->renderer, buffer);
+}
+
+void load_textures(struct display *display, char *textures_path)
+{
+    display->blk_textures = malloc(sizeof(SDL_Texture*) * NB_BLK_TYPES);
+    display->ent_textures = malloc(sizeof(SDL_Texture*) * NB_ENT_TYPES);
+
+    load_background(display, textures_path);
+
+    load_blk_texture(display, BLOCK, textures_path);
+    load_blk_texture(display, SPIKE, textures_path);
+    load_blk_texture(display, DBLOCK, textures_path);
+
+    load_ent_texture(display, PLAYER, textures_path);
+    load_ent_texture(display, ENEMY, textures_path);
+    load_ent_texture(display, BULLET, textures_path);
+    load_ent_texture(display, GUN_PICKUP, textures_path);
+    load_ent_texture(display, DOUBLE_JUMP_PICKUP, textures_path);
 
     return;
+}
+
+void display_background(SDL_Renderer *renderer, SDL_Texture *background, int width, int height)
+{
+
+    for(int y = 0; y < height; y++)
+    {
+        for(int x = 0; x < width; x++)
+        {
+            int posx = x * BLOCK_SIZE;
+            int posy = y * BLOCK_SIZE;
+            SDL_Rect texr =
+            {
+                .x = posx,
+                .y = posy,
+                .w = BLOCK_SIZE,
+                .h = BLOCK_SIZE,
+            };
+
+
+            SDL_QueryTexture(background, NULL, NULL, &posx, &posy);
+            SDL_RenderCopy(renderer, background, NULL, &texr);
+        }
+    }
 }
 
 void display_map(struct display *display, struct map *map)
 {
     SDL_RenderClear(display->renderer);
+    display_background(display->renderer, display->background, map->width, map->height);
 
     for(int y = 0; y < map->height; y++)
     {

@@ -3,7 +3,10 @@
 
 #include "stdio.h"
 #include "vector2.h"
+#include "entity.h"
 #include <stdlib.h>
+
+#define NB_BLK_TYPES 4
 
 enum blocktype
 {

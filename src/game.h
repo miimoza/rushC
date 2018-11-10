@@ -14,8 +14,7 @@ struct GameContext
     int cur_map;
 };
 
-struct GameContext init_game();
+struct GameContext *init_game();
 //void update(struct GameContext *game, struct Input event);
-void end_game(struct GameContext game);
 
 #endif /* !GAME_H_ */

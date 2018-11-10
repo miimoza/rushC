@@ -6,7 +6,7 @@ CFLAGS += $(shell sdl2-config --cflags)
 LDLIBS += $(shell sdl2-config --libs)
 
 VPATH = src
-OBJS = rush_coke.o map.o display.o
+OBJS = rush_coke.o map.o display.o entity.o game.o vector2.o
 
 all: rush_coke
 
