@@ -9,9 +9,9 @@ void update_entity(struct entity *entity, float delta, struct map *map)
     entity->spd = add_vect(entity->spd, scale_vect(delta, entity->acc));
     if (is_on_floor(entity, map))
     {
-        entity->spd.y = fmin(0, entity->spd.y);
-        if (entity->spd.y != 0)
-            entity->pos.y = fti(entity->pos.y);
+        entity->acc.y = 0;
+        entity->spd.y = 0;
+        entity->pos.y = fti(entity->pos.y);
     }
 }
 
@@ -47,6 +47,7 @@ void jump(struct entity *entity, float delta)
         0,
         -JUMP_FORCE
     };
+    //entity->spd = scale_vect(delta, jump);
     entity->spd = add_vect(entity->spd, scale_vect(delta, jump));
 
 }

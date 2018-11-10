@@ -30,9 +30,9 @@ int main(void)
         //UPDATE
         map->entities[1].spd.x = 0;
         if (input.inputs[RIGHT])
-            map->entities[1].spd.x = 0.1;
+            map->entities[1].spd.x = 0.15;
         if (input.inputs[LEFT])
-            map->entities[1].spd.x = -0.1;
+            map->entities[1].spd.x = -0.15;
         apply_gravity(&map->entities[1], 1);
         update_entity(&map->entities[1], 1, map);
 

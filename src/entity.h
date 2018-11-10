@@ -4,8 +4,8 @@
 #include "vector2.h"
 #include "map.h"
 
-#define GRAVITY_FORCE 0.0001
-#define JUMP_FORCE 0.5
+#define GRAVITY_FORCE 0.0025
+#define JUMP_FORCE 0.25
 
 #define NB_ENT_TYPES 5
 
