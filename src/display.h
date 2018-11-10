@@ -6,7 +6,7 @@
 #include "map.h"
 //#include "entity.h"
 
-#define BLOCK_SIZE 32
+#define BLOCK_SIZE 16
 
 struct display
 {
@@ -14,6 +14,7 @@ struct display
     SDL_Renderer *renderer;
     SDL_Texture **blk_textures;
     SDL_Texture **ent_textures;
+    SDL_Texture *background;
 };
 
 struct display *init_display(int width, int height);

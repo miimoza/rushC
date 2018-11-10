@@ -6,6 +6,8 @@
 #define GRAVITY_FORCE 0.1
 #define JUMP_FORCE 1
 
+#define NB_ENT_TYPES 5
+
 enum entitytype
 {
     PLAYER,
