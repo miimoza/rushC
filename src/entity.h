@@ -4,8 +4,8 @@
 #include "vector2.h"
 #include "map.h"
 
-#define GRAVITY_FORCE 0.1
-#define JUMP_FORCE 1
+#define GRAVITY_FORCE 0.0001
+#define JUMP_FORCE 0.5
 
 #define NB_ENT_TYPES 5
 
@@ -26,7 +26,7 @@ struct entity
     struct vector2 acc;
 };
 
-void update_entity(struct entity *entity, float delta);
+void update_entity(struct entity *entity, float delta, struct map *map);
 void apply_gravity(struct entity *entity, float delta);
 int is_on_floor(struct entity *entity, struct map *map);
 void jump(struct entity *entity, float delta);

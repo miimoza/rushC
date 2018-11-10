@@ -3,6 +3,7 @@
 #include "map.h"
 #include "game.h"
 #include "display.h"
+#include "input.h"
 
 
 int main(void)
@@ -16,18 +17,39 @@ int main(void)
     //SDL_Delay(10000);
 
     struct GameContext *game = init_game();
+    struct input input;
+
+    int jump_count = 0;
 
     while (game->is_playing)
     {
+        //INPUT
+        input = get_inputs();
+        game->is_playing = !input.inputs[QUIT];
+
+        //UPDATE
+        map->entities[1].spd.x = 0;
+        if (input.inputs[RIGHT])
+            map->entities[1].spd.x = 0.1;
+        if (input.inputs[LEFT])
+            map->entities[1].spd.x = -0.1;
+        apply_gravity(&map->entities[1], 1);
+        update_entity(&map->entities[1], 1, map);
+
+        if (is_on_floor(&map->entities[1], map))
+            jump_count = 1;
+
+        if (input.inputs[SPACE] && jump_count > 0)
+        {
+            jump(&map->entities[1], 1);
+            jump_count--;
+        }
+        //printf("PLAYER X: %f, PLAYER Y: %f", .pos.x, player.pos.y);
+
+
+        //DRAW
         display_map(display, map);
-        //struct Input event = get_current_input();
-        // compute new positions, sates, etc
-        //update(&game, event);
-        // draw the changes on the screen
-        //render_frame(game);
-        //SDL_Delay(3000);
-        SDL_Delay(5000);
-        game->is_playing = 0;
+        SDL_Delay(20);
     }
 
     //free

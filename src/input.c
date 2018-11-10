@@ -7,13 +7,6 @@ struct input
     int[NUMBER_KEYS] inputs;
 };
 
-enum inputtype =
-{
-    NOTHING = 0,
-    PRESSED = 1,
-    RELEASE = -1
-};
-
 enum keys =
 {
     NOTHING = 0,
@@ -26,33 +19,26 @@ enum keys =
 
 struct input get_inputs()
 {
+    SDL_PumpEvents();
     struct input input;
-    SDL_Event e;
-    if (SDL_PollEvent(&e))
+    for (int i = 0; i < NUMBER_KEYS; i++)
     {
-        for (int i = 0; i < NUMBER_KEYS; i++)
-        {
-            input.inputs[i] = NOTHING;
-        }
-        //QUIT
-        if (e.type == SDL_QUIT)
-	        input.inputs[QUIT] = PRESSED;
-		else if (e.type == SDL_KEYUP && e.key.keysym.sym == SDLK_ESCAPE)
-            input.inputs[QUIT] = RELEASE;
-
-        if (e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_SPACE)
-            input.inputs[SPACE] = PRESSED;
-        else if (e.type == SDL_KEYUP && e.key.keysym.sym == SDLK_SPACE)
-            input.inputs[SPACE] = RELEASE;
-
-        if (e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_LEFT)
-            input.inputs[LEFT] = PRESSED;
-        else if (e.type == SDL_KEYUP && e.key.keysym.sym == SDLK_LEFT)
-            input.inputs[LEFT] = RELEASE;
-
-        if (e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_RIGHT)
-            input.inputs[RIGHT] = PRESSED;
-        else if (e.type == SDL_KEYUP && e.key.keysym.sym == SDLK_RIGHT)
-            input.inputs[RIGHT] = RELEASE;
-	}
+        input.inputs[i] = 0;
+    }
+    const Uint8 *state = SDL_GetKeyboardState(NULL);
+    if (state[SDL_SCANCODE_ESCAPE])
+        input.inputs[QUIT] = 1;
+    if (state[SDL_SCANCODE_SPACE])
+        input.inputs[SPACE] = 1;
+    if (state[SDL_SCANCODE_LEFT])
+        input.inputs[LEFT] = 1;
+    if (state[SDL_SCANCODE_RIGHT])
+        input.inputs[RIGHT] = 1;
+    /*printf("Inputs:\n");
+    /printf("QUIT: %d, SPACE: %d, LEFT: %d, RIGHT: %d\n",
+            input.inputs[QUIT],
+            input.inputs[SPACE],
+            input.inputs[LEFT],
+            input.inputs[RIGHT]);*/
+    return input;
 }
