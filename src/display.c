@@ -1,6 +1,8 @@
-#include <SDL.h>
-
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
+#include "display.h"
 #include "map.h"
+
 //#include "entity.h"
 
 struct display *init_display(int width, int height)
@@ -16,8 +18,8 @@ struct display *init_display(int width, int height)
 
 void end_display(struct display *display)
 {
-    SDL_DestroyWindow(display->window);
-    SDL_DestroyRenderer(display->renderer);
+    //SDL_DestroyWindow(display->window);
+    //SDL_DestroyRenderer(display->renderer);
 }
 
 
@@ -89,23 +91,22 @@ void render_frame(struct GameContext game)
 void load_textures(struct display *display, char *textures_path)
 {
     display->blk_textures = malloc(sizeof(SDL_Texture*) * 1);
-    display->blk_textures[0] = IMG_LoadTexture(display->renderer, "maps/lvl1_textures/block.png");
+//    display->blk_textures[0] = IMG_LoadTexture(display->renderer, "maps/lvl1_textures/block.png");
     return;
 }
 
 void display_map(struct display *display, struct map *map)
 {
-    struct display *display;
-
     SDL_RenderClear(display->renderer);
 
-    for(int y = 0; y < game.map->height; y++)
+    for(int y = 0; y < map->height; y++)
     {
-        for(int x = 0; x < game.map->width; x++)
+        for(int x = 0; x < map->width; x++)
         {
-            enum blocktype blocktype = game.map->block[y * game.map->width + x];
+            enum blocktype blocktype = map->block[y * map->width + x];
             display_blk(display, blocktype, x * BLOCK_SIZE, y * BLOCK_SIZE);
         }
     }
+
     SDL_RenderPresent(display->renderer);
 }

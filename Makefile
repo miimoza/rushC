@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -Wall -Wextra -pedantic -std=c99 -lSDL -lSDL_image
+CFLAGS = -Wall -Wextra -pedantic -std=c99 -lSDL_image
 
 CFLAGS += $(shell sdl2-config --cflags)
 LDLIBS += $(shell sdl2-config --libs)

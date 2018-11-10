@@ -6,11 +6,18 @@
 
 int main(int argc, char** argv)
 {
+    printf("test\n" );
+
     struct map *map = parse_map("maps/lvl1.ez", "maps/lvl1_textures/");
+    printf("test\n" );
     struct display *display = init_display(map->width, map->height);
+    printf("test\n" );
     load_textures(display, map->texture_path);
+    printf("test\n" );
     display_map(display, map);
+    printf("test\n" );
     SDL_Delay(10000);
+    printf("test\n" );
 /*
     struct GameContext game = init_game();
 
