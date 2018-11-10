@@ -1,6 +1,9 @@
 #ifndef MAP_H_
 #define MAP_H_
 
+#include "stdio.h"
+#include <stdlib.h>
+
 enum blocktype
 {
     AIR,
