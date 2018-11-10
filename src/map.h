@@ -10,7 +10,7 @@ enum blocktype
     AIR,
     BLOCK,
     SPIKE,
-    DESTRUCTIBLE_BLOCK
+    DBLOCK
 };
 
 struct map
@@ -19,7 +19,7 @@ struct map
     int width;
     int height;
     int nbentities;
-    //struct entity *entities
+    struct entity *entities
     enum blocktype *block;
 };
 
@@ -28,6 +28,6 @@ int get_width(char *path);
 int get_height(char *path);
 struct map **parse_maps(char **path, int size, char **texture_path);
 int fti(float x);
-enum blocktype get_block(struct map *map, struct vector2 *vec);
+enum blocktype get_block(struct map *map, struct vector2 vec);
 
 #endif /* !MAP_H_ */

@@ -1,5 +1,5 @@
-#ifndef ENTITY_H_
-#define ENTITY_H_
+//#ifndef ENTITY_H_
+//#define ENTITY_H_
 #include "vector2.h"
 #include "map.h"
 
@@ -28,4 +28,4 @@ void apply_gravity(struct entity *entity, float delta);
 int is_on_floor(struct entity *entity, struct map *map);
 void jump(struct entity *entity, float delta);
 
-#endif /* !ENTITY_H_ */
+//#endif /* !ENTITY_H_ */

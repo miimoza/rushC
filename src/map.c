@@ -79,7 +79,7 @@ int fti(float x)
     return x;
 }
 
-enum blocktype get_block(struct map *map, struct vector2 *vec)
+enum blocktype get_block(struct map *map, struct vector2 vec)
 {
-    return map->block[fti(vec->x) + fti(vec->y) * map->width];
+    return map->block[fti(vec.x + 0.5f) + fti(vec.y) * map->width];
 }

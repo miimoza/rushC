@@ -1,7 +1,4 @@
-#ifndef ENTITY_H_
-#define ENTITY_H_
 #include "entity.h"
-#include "map.h"
 
 #if 0
 enum entitytype
@@ -46,7 +43,7 @@ int is_on_floor(struct entity *entity, struct map *map)
         1
     };
     enum blocktype block =
-        get_block(map, add_vect(entity->pos, gravity_orientation);
+        get_block(map, add_vect(entity->pos, gravity_orientation));
     if (block == AIR || block == SPIKE)
             return 0;
     return 1;
@@ -54,13 +51,11 @@ int is_on_floor(struct entity *entity, struct map *map)
 
 void jump(struct entity *entity, float delta)
 {
-    struct vector2 =
+    struct vector2 jump =
     {
         0,
         JUMP_FORCE
     };
-    entity->spd = add_vect(entity->spd, scale_vect(delta, vector2));
+    entity->spd = add_vect(entity->spd, scale_vect(delta, jump));
 
 }
-
-#endif /* !ENTITY_H_ */
