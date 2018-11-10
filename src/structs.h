@@ -34,12 +34,19 @@ enum entitytype
     DOUBLE_JUMP_PICKUP
 };
 
+enum direction
+{
+    DIR_LEFT,
+    DIR_RIGHT
+};
+
 struct entity
 {
     enum entitytype type;
     struct vector2 pos;
     struct vector2 spd;
     struct vector2 acc;
+    enum direction dir;
 };
 
 
