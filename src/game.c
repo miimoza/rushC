@@ -1,5 +1,5 @@
 #include "structs.h"
-
+#include "entity.h"
 struct GameContext *init_game()
 {
     struct GameContext *game = malloc(sizeof(struct GameContext));
@@ -15,7 +15,12 @@ struct GameContext *init_game()
     return game;
 }
 
-void update_frame(struct map *map, struct input input)
+void update_frame(struct map *map)
 {
-    return;
+    for(int entity_i = 0; entity_i < map->nbentities; entity_i++)
+    {
+        struct entity entity = map->entities[entity_i];
+        update_entity(&entity, 1);
+    }
+
 }

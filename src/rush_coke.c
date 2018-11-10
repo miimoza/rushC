@@ -29,7 +29,7 @@ int main(void)
         game->is_playing = !input.inputs[QUIT];
 
         //UPDATE
-        update_frame(map, input);
+        update_frame(map);
         update_player(&map->player, map, input);
         //printf("PLAYER X: %f, PLAYER Y: %f", .pos.x, player.pos.y);
 

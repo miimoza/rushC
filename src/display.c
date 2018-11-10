@@ -196,10 +196,7 @@ void display_map(struct display *display, struct map *map)
     {
         struct entity entity = map->entities[entity_i];
         //printf("entity : x: %f y: %f\n", entity.pos.x, entity.pos.y);
-        printf("debug in %d\n", entity.type);
-
         display_entity(display, entity);
-        printf("debug out\n" );
     }
     display_coke_bar(display->renderer, 250);
     display_entity(display, map->player);
