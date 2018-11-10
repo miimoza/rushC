@@ -54,7 +54,7 @@ struct map *parse_map(char *path, char *texture_path)
         else if (c == 's')
             map->block[i] = SPIKE;
         else if (c == 'd')
-            map->block[i] = DESTRUCTIBLE_BLOCK;
+            map->block[i] = DBLOCK;
         else
             map->block[i] = AIR;
     }

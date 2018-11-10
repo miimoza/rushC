@@ -19,7 +19,7 @@ struct map
     int width;
     int height;
     int nbentities;
-    struct entity *entities
+    struct entity *entities;
     enum blocktype *block;
 };
 
