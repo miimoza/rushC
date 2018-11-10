@@ -29,35 +29,6 @@ int get_height(char *path)
     return count;
 }
 
-int get_pos_x(char *path, char chr)
-{
-    FILE *file;
-    file = fopen(path, "r");
-    int count;
-    char c;
-    for (c = fgetc(file); c != chr; c = fgetc(file))
-    {
-        count++;
-    }
-    fclose(file);
-    return count;
-}
-
-int get_pos_y(char *path, char chr)
-{
-    FILE *file;
-    file = fopen(path, "r");
-    int count;
-    char c;
-    for (c = fgetc(file); c != chr; c = fgetc(file))
-    {
-        if (c == '\n')
-            count++;
-    }
-    fclose(file);
-    return count;
-}
-
 int get_entitynb(char *path)
 {
     FILE *file;
@@ -78,7 +49,6 @@ struct map *parse_map(char *path, char *texture_path)
     struct map *map = malloc(sizeof(struct map));
     map->nbentities = 0;
     map->entities = malloc(get_entitynb(path) * sizeof(struct entity));
-    printf("spr\n");
     map->width = get_width(path);
     printf("width: %d\n", map->width);
     map->height = get_height(path);
@@ -94,7 +64,6 @@ struct map *parse_map(char *path, char *texture_path)
     int y = 0;
     for (c = fgetc(file); c != EOF; c = fgetc(file), i++, x++)
     {
-        printf("BOUCLE\n");
         if (c == '\n')
         {
             x = 0;
