@@ -14,3 +14,8 @@ struct GameContext *init_game()
 
     return game;
 }
+
+void update_frame(struct map *map, struct input input)
+{
+    return;
+}

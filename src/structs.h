@@ -8,6 +8,7 @@
 #define BLOCK_SIZE 32
 #define NB_ENT_TYPES 5
 #define NB_BLK_TYPES 4
+#define RELOAD_TIME 500
 
 struct vector2
 {
@@ -37,7 +38,8 @@ enum entitytype
 enum direction
 {
     DIR_LEFT,
-    DIR_RIGHT
+    DIR_RIGHT,
+    NO_DIR
 };
 
 struct entity
