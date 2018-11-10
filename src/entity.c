@@ -4,10 +4,20 @@
 #include "utils.h"
 #include "map.h"
 
-void update_entity(struct entity *entity, float delta, struct map *map)
+void update_entity(struct entity *entity, float delta)
 {
     entity->pos = add_vect(entity->pos, scale_vect(delta, entity->spd));
     entity->spd = add_vect(entity->spd, scale_vect(delta, entity->acc));
+    update_direction(entity);
+}
+
+void collision(struct entity *entity, struct map *map)
+{
+    if (is_on_right_wall(entity, map))
+    {
+        entity->spd.x = 0;
+        entity->pos.x = fti(entity->pos.x);
+    }
     if (is_on_floor(entity, map))
     {
         entity->acc.y = 0;
@@ -19,13 +29,6 @@ void update_entity(struct entity *entity, float delta, struct map *map)
         entity->spd.y = 0;
         entity->pos.y = fti(entity->pos.y) + 1;
     }
-    if (is_on_right_wall(entity, map))
-    {
-        entity->spd.x = 0;
-        entity->pos.x = fti(entity->pos.x);
-        entity->pos.y = fti(entity->pos.y) - 1;
-    }
-    update_direction(entity);
 }
 
 void apply_gravity(struct entity *entity, float delta)
@@ -82,7 +85,7 @@ int is_on_right_wall(struct entity *entity, struct map *map)
     };
     struct vector2 real_pos =
     {
-        -1,
+        0,
         0
     };
     enum blocktype block =

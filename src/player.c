@@ -12,7 +12,8 @@ void update_player(struct entity *player, struct map *map, struct input input)
     if (input.inputs[LEFT])
         player->spd.x = -0.15;
     apply_gravity(player, 1);
-    update_entity(player, 1, map);
+    collision(player, map);
+    update_entity(player, 1);
 
     if (is_on_floor(player, map))
         jump_count = 1;
