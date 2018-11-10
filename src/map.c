@@ -90,11 +90,17 @@ struct map *parse_map(char *path, char *texture_path)
     file = fopen(path, "r");
     char c;
     int i = 0;
-    for (c = fgetc(file); c != EOF; c = fgetc(file), i++)
+    int x = 0;
+    int y = 0;
+    for (c = fgetc(file); c != EOF; c = fgetc(file), i++, x++)
     {
         printf("BOUCLE\n");
         if (c == '\n')
+        {
+            x = 0;
+            y++;
             c = fgetc(file);
+        }
         if (c == 'b')
             map->block[i] = BLOCK;
         else if (c == 's')
@@ -103,15 +109,15 @@ struct map *parse_map(char *path, char *texture_path)
             map->block[i] = DBLOCK;
         else if (c == 'p')
         {
-            map->entities[map->nbentities++] = create_entity(PLAYER, 0, 0);
+            map->entities[map->nbentities++] = create_entity(PLAYER, x, y);
         }
         else if (c == 'e')
         {
-            map->entities[map->nbentities++] = create_entity(ENEMY, 0, 0);
+            map->entities[map->nbentities++] = create_entity(ENEMY, x, y);
         }
         else if (c == 'g')
         {
-            map->entities[map->nbentities++] = create_entity(GUN_PICKUP, 0, 0);
+            map->entities[map->nbentities++] = create_entity(GUN_PICKUP, x, y);
         }
         else
             map->block[i] = AIR;
