@@ -12,7 +12,6 @@ struct GameContext
     int is_playing;
     int nb_maps;
     int cur_map;
-    struct display *display;
 };
 
 struct GameContext init_game();

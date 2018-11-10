@@ -2,7 +2,7 @@
 #define DISPLAY_H_
 
 #include <SDL.h>
-#include "game.h"
+
 #include "map.h"
 //#include "entity.h"
 

@@ -2,7 +2,6 @@
 #define MAP_H_
 
 #include "stdio.h"
-#include "entity.h"
 #include <stdlib.h>
 
 enum blocktype
@@ -19,7 +18,7 @@ struct map
     int width;
     int height;
     int nbentities;
-    struct entity *entities
+    //struct entity *entities
     enum blocktype *block;
 };
 

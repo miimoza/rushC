@@ -1,5 +1,5 @@
 #include <SDL.h>
-#include "game.h"
+
 #include "map.h"
 //#include "entity.h"
 
@@ -23,6 +23,9 @@ void end_display(struct display *display)
 
 void display_blk(struct display *display, enum blocktype blocktype, int x, int y)
 {
+    if(blocktype != BLOCK)
+        return;
+
     SDL_Texture *texture = display->blk_textures[blocktype];
     SDL_Renderer *renderer = display->renderer;
 
@@ -37,6 +40,7 @@ void display_blk(struct display *display, enum blocktype blocktype, int x, int y
     SDL_QueryTexture(texture, NULL, NULL, &x, &y);
     SDL_RenderCopy(renderer, texture, NULL, &texr);
 }
+
 /*
 void display_entity(struct display *display, struct entity *entity)
 {
@@ -56,7 +60,7 @@ void display_entity(struct display *display, struct entity *entity)
     SDL_RenderCopy(renderer, texture, NULL, &texr);
 }
 */
-
+/*
 void render_frame(struct GameContext game)
 {
     struct display *display = game.display;
@@ -71,17 +75,37 @@ void render_frame(struct GameContext game)
             display_blk(display, blocktype, x * BLOCK_SIZE, y * BLOCK_SIZE);
         }
     }
-/*
+
     for(int entity_i = 0; entity_i < game.map->nbEntities; entity_i++)
     {
         struct entity entity = game.map->entities[entity_i];
         display_entity(display, entity);
     }
-*/
+
     SDL_RenderPresent(display->renderer);
 }
+*/
 
 void load_textures(struct display *display, char *textures_path)
 {
+    display->blk_textures = malloc(sizeof(SDL_Texture*) * 1);
+    display->blk_textures[0] = IMG_LoadTexture(display->renderer, "maps/lvl1_textures/block.png");
     return;
+}
+
+void display_map(struct display *display, struct map *map)
+{
+    struct display *display;
+
+    SDL_RenderClear(display->renderer);
+
+    for(int y = 0; y < game.map->height; y++)
+    {
+        for(int x = 0; x < game.map->width; x++)
+        {
+            enum blocktype blocktype = game.map->block[y * game.map->width + x];
+            display_blk(display, blocktype, x * BLOCK_SIZE, y * BLOCK_SIZE);
+        }
+    }
+    SDL_RenderPresent(display->renderer);
 }
