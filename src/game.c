@@ -19,8 +19,7 @@ void update_frame(struct map *map)
 {
     for(int entity_i = 0; entity_i < map->nbentities; entity_i++)
     {
-        struct entity entity = map->entities[entity_i];
-        update_entity(&entity, 1);
+        update_entity(&map->entities[entity_i], 1);
     }
 
 }

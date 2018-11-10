@@ -6,9 +6,12 @@
 
 void update_entity(struct entity *entity, float delta)
 {
+
     entity->pos = add_vect(entity->pos, scale_vect(delta, entity->spd));
     entity->spd = add_vect(entity->spd, scale_vect(delta, entity->acc));
+
     update_direction(entity);
+
 }
 
 void collision(struct entity *entity, struct map *map)
