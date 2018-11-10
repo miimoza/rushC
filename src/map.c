@@ -107,7 +107,10 @@ struct map *parse_map(char *path, char *texture_path)
             map->block[i] = SPIKE;
         else if (c == 'd')
             map->block[i] = DBLOCK;
-        else if (c == 'p')
+        else
+            map->block[i] = AIR;
+
+        if (c == 'p')
         {
             map->entities[map->nbentities++] = create_entity(PLAYER, x, y);
         }
@@ -119,8 +122,7 @@ struct map *parse_map(char *path, char *texture_path)
         {
             map->entities[map->nbentities++] = create_entity(GUN_PICKUP, x, y);
         }
-        else
-            map->block[i] = AIR;
+
     }
     fclose(file);
     return map;
