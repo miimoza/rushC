@@ -1,13 +1,5 @@
 #include "vector2.h"
 
-#if 0
-struct vector2
-{
-    float x;
-    float y;
-}
-#endif
-
 struct vector2 add_vect(struct vector2 vec1, struct vector2 vec2)
 {
     struct vector2 vec =

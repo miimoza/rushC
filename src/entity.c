@@ -1,24 +1,5 @@
 #include "entity.h"
 
-#if 0
-enum entitytype
-{
-    PLAYER,
-    ENEMY,
-    BULLET,
-    GUN_PICKUP,
-    DOUBLE_JUMP_PICKUP
-};
-
-struct entity
-{
-    enum entitytype type;
-    struct vector2 pos;
-    struct vector2 spd;
-    struct vector2 acc;
-};
-#endif
-
 void update_entity(struct entity *entity, float delta)
 {
     entity->pos = add_vect(entity->pos, scale_vect(delta, entity->spd));

@@ -3,6 +3,7 @@
 
 #include "stdio.h"
 #include "vector2.h"
+
 #include <stdlib.h>
 
 #define NB_BLK_TYPES 4

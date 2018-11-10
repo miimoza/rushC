@@ -8,7 +8,7 @@ int main(void)
 {
     printf("test\n" );
 
-    struct map *map = parse_map("maps/lvl1.ez", "maps/lvl1_textures/");
+    struct map *map = parse_map("maps/lvl2.ez", "maps/lvl1_textures/");
     struct display *display = init_display(map->width, map->height);
     load_textures(display, map->texture_path);
     //display_map(display, map);
@@ -25,7 +25,7 @@ int main(void)
         // draw the changes on the screen
         //render_frame(game);
         //SDL_Delay(3000);
-        SDL_Delay(10000);
+        SDL_Delay(5000);
         game->is_playing = 0;
     }
 
