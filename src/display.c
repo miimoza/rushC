@@ -178,6 +178,7 @@ void display_coke_bar(SDL_Renderer *renderer, int coke)
 
 }
 
+
 void display_map(struct display *display, struct map *map)
 {
     SDL_RenderClear(display->renderer);
@@ -198,6 +199,7 @@ void display_map(struct display *display, struct map *map)
         display_entity(display, entity);
     }
     display_coke_bar(display->renderer, 250);
+    display_entity(display, map->player);
 
     SDL_RenderPresent(display->renderer);
 }
