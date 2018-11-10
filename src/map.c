@@ -139,7 +139,8 @@ struct entity create_entity(enum entitytype type, int x, int y)
         type,
         vec_pos,
         vec_spd,
-        vec_acc
+        vec_acc,
+        DIR_RIGHT
     };
     return player;
 }

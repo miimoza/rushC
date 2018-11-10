@@ -1,22 +1,6 @@
 #include <SDL2/SDL.h>
 #include "input.h"
 
-#if 0
-struct input
-{
-    int[NUMBER_KEYS] inputs;
-};
-
-enum keys =
-{
-    NOTHING = 0,
-    QUIT = 1,
-    SPACE = 2,
-    LEFT = 3,
-    RIGHT = 4
-};
-#endif
-
 struct input get_inputs()
 {
     SDL_PumpEvents();
@@ -34,6 +18,8 @@ struct input get_inputs()
         input.inputs[LEFT] = 1;
     if (state[SDL_SCANCODE_RIGHT])
         input.inputs[RIGHT] = 1;
+    if (state[SDL_SCANCODE_S])
+        input.inputs[SHOOT] = 1;
     /*printf("Inputs:\n");
     /printf("QUIT: %d, SPACE: %d, LEFT: %d, RIGHT: %d\n",
             input.inputs[QUIT],

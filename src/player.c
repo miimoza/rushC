@@ -1,5 +1,6 @@
 #include "player.h"
 #include "entity.h"
+#include "bullet.h"
 
 static int jump_count = 0;
 
@@ -21,4 +22,7 @@ void update_player(struct entity *player, struct map *map, struct input input)
         jump(player, 1);
         jump_count--;
     }
+
+    if (input.inputs[SHOOT])
+        shot_bullet(map, player);
 }

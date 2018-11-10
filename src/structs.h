@@ -4,7 +4,7 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 
-#define NUMBER_KEYS 4
+#define NUMBER_KEYS 5
 #define BLOCK_SIZE 32
 #define NB_ENT_TYPES 5
 #define NB_BLK_TYPES 4
@@ -61,7 +61,8 @@ enum keys
     QUIT,
     SPACE,
     LEFT,
-    RIGHT
+    RIGHT,
+    SHOOT
 };
 
 enum blocktype
