@@ -3,19 +3,9 @@
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
-#include "map.h"
-//#include "entity.h"
 
-#define BLOCK_SIZE 32
+#include "structs.h"
 
-struct display
-{
-    SDL_Window *window;
-    SDL_Renderer *renderer;
-    SDL_Texture **blk_textures;
-    SDL_Texture **ent_textures;
-    SDL_Texture *background;
-};
 
 struct display *init_display(int width, int height);
 void end_display(struct display *display);

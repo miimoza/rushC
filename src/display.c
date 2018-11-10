@@ -1,9 +1,8 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
-#include <SDL_image.h>
+
+#include "structs.h"
 #include "display.h"
-#include "map.h"
-#include "entity.h"
 
 struct display *init_display(int width, int height)
 {
@@ -64,31 +63,6 @@ void display_entity(struct display *display, struct entity entity)
     SDL_RenderCopy(renderer, texture, NULL, &texr);
 }
 
-/*
-void render_frame(struct GameContext game)
-{
-    struct display *display = game.display;
-
-    SDL_RenderClear(display->renderer);
-
-    for(int y = 0; y < game.map->height; y++)
-    {
-        for(int x = 0; x < game.map->width; x++)
-        {
-            enum blocktype blocktype = game.map->block[y * game.map->width + x];
-            display_blk(display, blocktype, x * BLOCK_SIZE, y * BLOCK_SIZE);
-        }
-    }
-
-    for(int entity_i = 0; entity_i < game.map->nbEntities; entity_i++)
-    {
-        struct entity entity = game.map->entities[entity_i];
-        display_entity(display, entity);
-    }
-
-    SDL_RenderPresent(display->renderer);
-}
-*/
 
 void load_blk_texture(struct display *display, enum blocktype blk_type, char *textures_path)
 {
@@ -180,7 +154,7 @@ void display_background(SDL_Renderer *renderer, SDL_Texture *background, int wid
                 .x = posx,
                 .y = posy,
                 .w = BLOCK_SIZE,
-                .h = BLOCK_SIZE,
+                .h = BLOCK_SIZE
             };
 
 
@@ -189,12 +163,25 @@ void display_background(SDL_Renderer *renderer, SDL_Texture *background, int wid
         }
     }
 }
+void display_coke_bar(SDL_Renderer *renderer, int coke)
+{
+    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+    SDL_Rect rect =
+    {
+        .x = 8,
+        .y = 8,
+        .w = coke,
+        .h = 10
+    };
+
+    SDL_RenderFillRect(renderer, &rect);
+
+}
 
 void display_map(struct display *display, struct map *map)
 {
     SDL_RenderClear(display->renderer);
     display_background(display->renderer, display->background, map->width, map->height);
-
     for(int y = 0; y < map->height; y++)
     {
         for(int x = 0; x < map->width; x++)
@@ -210,6 +197,7 @@ void display_map(struct display *display, struct map *map)
         //printf("entity : x: %f y: %f\n", entity.pos.x, entity.pos.y);
         display_entity(display, entity);
     }
+    display_coke_bar(display->renderer, 250);
 
     SDL_RenderPresent(display->renderer);
 }

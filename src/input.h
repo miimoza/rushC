@@ -1,17 +1,8 @@
+#ifndef INPUT_H_
+#define INPUT_H_
 
-#define NUMBER_KEYS 4
-
-struct input
-{
-    int inputs[NUMBER_KEYS];
-};
-
-enum keys
-{
-    QUIT,
-    SPACE,
-    LEFT,
-    RIGHT
-};
+#include "structs.h"
 
 struct input get_inputs();
+
+#endif /* !INPUT_H_ */

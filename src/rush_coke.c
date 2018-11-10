@@ -1,10 +1,11 @@
 #include <stdio.h>
 
-#include "map.h"
-#include "game.h"
+#include "structs.h"
 #include "display.h"
+#include "game.h"
 #include "input.h"
-
+#include "entity.h"
+#include "map.h"
 
 int main(void)
 {
@@ -24,6 +25,7 @@ int main(void)
     while (game->is_playing)
     {
         //INPUT
+        printf("frame\n" );
         input = get_inputs();
         game->is_playing = !input.inputs[QUIT];
 

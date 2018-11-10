@@ -1,32 +1,12 @@
 #ifndef MAP_H_
 #define MAP_H_
 
-#include "stdio.h"
-#include "vector2.h"
-#include "entity.h"
-#include "utils.h"
+#include <stdio.h>
 #include <stdlib.h>
 
-#define NB_BLK_TYPES 4
+#include "structs.h"
 
-enum blocktype
-{
-    AIR,
-    BLOCK,
-    SPIKE,
-    DBLOCK
-};
 
-struct map
-{
-    char *texture_path;
-    int width;
-    int height;
-    int nbentities;
-    struct entity *entities;
-    struct entity player;
-    enum blocktype *block;
-};
 
 struct map *parse_map(char *path, char *texture_path);
 int get_width(char *path);

@@ -1,4 +1,5 @@
 #include "map.h"
+#include "utils.h"
 
 int get_width(char *path)
 {

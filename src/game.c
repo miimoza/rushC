@@ -1,7 +1,4 @@
-#include "SDL.h"
-#include "map.h"
-#include "display.h"
-#include "game.h"
+#include "structs.h"
 
 struct GameContext *init_game()
 {

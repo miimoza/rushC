@@ -1,18 +1,7 @@
 #ifndef GAME_H_
 #define GAME_H_
 
-#include "SDL.h"
-#include "map.h"
-#include "display.h"
-
-struct GameContext
-{
-    struct map **maps;
-    struct map *map;
-    int is_playing;
-    int nb_maps;
-    int cur_map;
-};
+#include "structs.h"
 
 struct GameContext *init_game();
 //void update(struct GameContext *game, struct Input event);

@@ -1,7 +1,8 @@
+#include <math.h>
 #include "entity.h"
 #include "vector2.h"
 #include "utils.h"
-#include <math.h>
+#include "map.h"
 
 void update_entity(struct entity *entity, float delta, struct map *map)
 {

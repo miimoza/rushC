@@ -1,5 +1,5 @@
-#include "input.h"
 #include <SDL2/SDL.h>
+#include "input.h"
 
 #if 0
 struct input
