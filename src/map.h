@@ -24,6 +24,7 @@ struct map
     int height;
     int nbentities;
     struct entity *entities;
+    struct entity player;
     enum blocktype *block;
 };
 

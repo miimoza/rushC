@@ -2,7 +2,6 @@
 #define ENTITY_H_
 
 #include "vector2.h"
-#include "map.h"
 
 #define GRAVITY_FORCE 0.0025
 #define JUMP_FORCE 0.25
@@ -25,6 +24,8 @@ struct entity
     struct vector2 spd;
     struct vector2 acc;
 };
+
+#include "map.h"
 
 void update_entity(struct entity *entity, float delta, struct map *map);
 void apply_gravity(struct entity *entity, float delta);

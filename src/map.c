@@ -81,7 +81,7 @@ struct map *parse_map(char *path, char *texture_path)
 
         if (c == 'p')
         {
-            map->entities[map->nbentities++] = create_entity(PLAYER, x, y);
+            map->player = create_entity(PLAYER, x, y);
         }
         else if (c == 'e')
         {
