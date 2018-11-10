@@ -81,7 +81,7 @@ struct map *parse_map(char *path, char *texture_path)
 
         if (c == 'p')
         {
-            map->entities[map->nbentities++] = create_entity(PLAYER, x, y);
+            map->player = create_entity(PLAYER, x, y);
         }
         else if (c == 'e')
         {
@@ -107,11 +107,6 @@ struct map **parse_maps(char **path, int size, char **texture_path)
     }
     return array_map;
 
-}
-
-int fti(float x)
-{
-    return x;
 }
 
 enum blocktype get_block(struct map *map, struct vector2 vec)

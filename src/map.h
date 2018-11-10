@@ -4,6 +4,7 @@
 #include "stdio.h"
 #include "vector2.h"
 #include "entity.h"
+#include "utils.h"
 #include <stdlib.h>
 
 #define NB_BLK_TYPES 4
@@ -23,6 +24,7 @@ struct map
     int height;
     int nbentities;
     struct entity *entities;
+    struct entity player;
     enum blocktype *block;
 };
 
@@ -31,7 +33,6 @@ int get_width(char *path);
 int get_height(char *path);
 int get_entitynb(char *path);
 struct map **parse_maps(char **path, int size, char **texture_path);
-int fti(float x);
 enum blocktype get_block(struct map *map, struct vector2 vec);
 struct entity create_entity(enum entitytype type, int x, int y);
 
