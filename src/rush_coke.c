@@ -6,6 +6,7 @@
 #include "input.h"
 #include "entity.h"
 #include "map.h"
+#include "player.h"
 
 int main(void)
 {
@@ -20,8 +21,6 @@ int main(void)
     struct GameContext *game = init_game();
     struct input input;
 
-    int jump_count = 0;
-
     while (game->is_playing)
     {
         //INPUT
@@ -30,24 +29,8 @@ int main(void)
         game->is_playing = !input.inputs[QUIT];
 
         //UPDATE
-        map->entities[1].spd.x = 0;
-        if (input.inputs[RIGHT])
-            map->entities[1].spd.x = 0.15;
-        if (input.inputs[LEFT])
-            map->entities[1].spd.x = -0.15;
-        apply_gravity(&map->entities[1], 1);
-        update_entity(&map->entities[1], 1, map);
-
-        if (is_on_floor(&map->entities[1], map))
-            jump_count = 1;
-
-        if (input.inputs[SPACE] && jump_count > 0)
-        {
-            jump(&map->entities[1], 1);
-            jump_count--;
-        }
+        update_player(&map->player, map, input);
         //printf("PLAYER X: %f, PLAYER Y: %f", .pos.x, player.pos.y);
-
 
         //DRAW
         display_map(display, map);
