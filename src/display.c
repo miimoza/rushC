@@ -1,5 +1,6 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
+#include <SDL_image.h>
 #include "display.h"
 #include "map.h"
 
@@ -18,15 +19,13 @@ struct display *init_display(int width, int height)
 
 void end_display(struct display *display)
 {
-    //SDL_DestroyWindow(display->window);
-    //SDL_DestroyRenderer(display->renderer);
+    SDL_DestroyWindow(display->window);
+    SDL_DestroyRenderer(display->renderer);
 }
 
 
 void display_blk(struct display *display, enum blocktype blocktype, int x, int y)
 {
-    if(blocktype != BLOCK)
-        return;
 
     SDL_Texture *texture = display->blk_textures[blocktype];
     SDL_Renderer *renderer = display->renderer;
@@ -90,8 +89,16 @@ void render_frame(struct GameContext game)
 
 void load_textures(struct display *display, char *textures_path)
 {
-    display->blk_textures = malloc(sizeof(SDL_Texture*) * 1);
-//    display->blk_textures[0] = IMG_LoadTexture(display->renderer, "maps/lvl1_textures/block.png");
+    display->blk_textures = malloc(sizeof(SDL_Texture*) * 4);
+    SDL_Texture **blk_textures = display->blk_textures;
+
+    char buffer[4096];
+    strcpy(buffer, textures_path);
+    strcat(buffer, "block.png");
+    blk_textures[BLOCK] = IMG_LoadTexture(display->renderer, buffer);
+    blk_textures[SPIKE] = IMG_LoadTexture(display->renderer, "maps/lvl1_textures/spike.png");
+    blk_textures[DBLOCK] = IMG_LoadTexture(display->renderer, "maps/lvl1_textures/destructible_block.png");
+
     return;
 }
 
