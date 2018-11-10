@@ -22,9 +22,9 @@ struct map
     enum blocktype *block;
 };
 
-struct map *parse_map(char *path);
-int getwidth(char *path);
-int getheight(char *path);
-struct map **parse_maps(char *path);
+struct map *parse_map(char *path, char *texture_path);
+int get_width(char *path);
+int get_height(char *path);
+struct map **parse_maps(char **path, int size, char **texture_path);
 
 #endif /* !MAP_H_ */

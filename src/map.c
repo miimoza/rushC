@@ -29,13 +29,14 @@ int get_height(char *path)
     return count;
 }
 
-struct map *parse_map(char *path)
+struct map *parse_map(char *path, char *texture_path)
 {
-    struct map map;
-    map.width = get_width(path);
-    map.height = get_height(path);
-    int size = map.width * map.height;
-    map.block = malloc(size * sizeof(char));
+    struct map *map = malloc(sizeof(struct map));
+    map->width = get_width(path);
+    map->height = get_height(path);
+    map->texture_path = texture_path;
+    int size = map->width * map->height;
+    map->block = malloc(size * sizeof(char));
     FILE *file;
     file = fopen(path, "r");
     char c;
@@ -45,25 +46,25 @@ struct map *parse_map(char *path)
         if (c == '\n')
             c = fgetc(file);
         if (c == 'b')
-            map.block[i] = BLOCK;
+            map->block[i] = BLOCK;
         else if (c == 's')
-            map.block[i] = SPIKE;
+            map->block[i] = SPIKE;
         else if (c == 'd')
-            map.block[i] = DESTRUCTIBLE_BLOCK;
+            map->block[i] = DESTRUCTIBLE_BLOCK;
         else
-            map.block[i] = AIR;
+            map->block[i] = AIR;
     }
     fclose(file);
     return map;
 }
 
-struct map **parse_maps(char **path, int size)
+struct map **parse_maps(char **path, int size, char **texture_path)
 {
-    char *array_map = malloc(size * sizeof(char *));
+    struct map **array_map = malloc(size * sizeof(char *));
     int i = 0;
     for (; path[i]; i++)
     {
-        array_map[i] = *path[i];
+        array_map[i] = parse_map(path[i], texture_path[i]);
     }
     return array_map;
 
