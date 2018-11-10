@@ -8,7 +8,8 @@
 #include "structs.h"
 
 
-void update_entity(struct entity *entity, float delta, struct map *map);
+void update_entity(struct entity *entity, float delta);
+void collision(struct entity *entity, struct map *map);
 void apply_gravity(struct entity *entity, float delta);
 int is_on_floor(struct entity *entity, struct map *map);
 int is_on_ceilling(struct entity *entity, struct map *map);
