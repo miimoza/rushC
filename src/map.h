@@ -2,6 +2,7 @@
 #define MAP_H_
 
 #include "stdio.h"
+#include "entity.h"
 #include <stdlib.h>
 
 enum blocktype
@@ -17,10 +18,14 @@ struct map
     char *texture_path;
     int width;
     int height;
+    int nbentities;
+    struct entity *entities
     enum blocktype *block;
 };
 
 struct map parse_map(char *path);
-int get_size(char *path);
+int getwidth(char *path);
+int getheight(char *path);
+char *parse(char *path);
 
 #endif /* !MAP_H_ */

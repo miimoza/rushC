@@ -1,9 +1,40 @@
 #include "map.h"
 
+int get_width(char *path)
+{
+    FILE *file;
+    file = fopen(path, "r");
+    int count = 0;
+    char c;
+    for (c = fgetc(file); c != '\n'; c = fgetc(file))
+    {
+        count++;
+    }
+    fclose(file);
+    return count;
+}
+
+int get_height(char *path)
+{
+    FILE *file;
+    file = fopen(path, "r");
+    int count = 0;
+    char c;
+    for (c = fgetc(file); c != EOF; c = fgetc(file))
+    {
+        if (c == '\n')
+            count++;
+    }
+    fclose(file);
+    return count;
+}
+
 struct map parse_map(char *path)
 {
     struct map map;
-    int size = get_size(path);
+    map.width = get_width(path);
+    map.height = get_height(path);
+    int size = map.width * map.height;
     map.block = malloc(size * sizeof(char));
     FILE *file;
     file = fopen(path, "r");
@@ -26,16 +57,14 @@ struct map parse_map(char *path)
     return map;
 }
 
-int get_size(char *path)
+char *parse(char **path, int size)
 {
-    FILE *file;
-    file = fopen(path, "r");
-    int count = 0;
-    char c;
-    for (c = fgetc(file); c != EOF; c = fgetc(file))
+    char *array_map = malloc(size * sizeof(char *));
+    int i = 0;
+    for (; path[i]; i++)
     {
-        count++;
+        array_map[i] = *path[i];
     }
-    fclose(file);
-    return count;
+    return array_map;
+
 }
