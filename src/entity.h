@@ -16,5 +16,9 @@ int is_on_right_wall(struct entity *entity, struct map *map);
 
 void jump(struct entity *entity, float delta);
 void add_entity(struct map *map, struct entity entity);
+void update_direction(struct entity *entity);
+void delete_entity(struct map *map, struct entity entity);
+int entities_are_equal(struct entity ent1, struct entity ent2);
+void add_entity(struct map *map, struct entity entity);
 
 #endif /* !ENTITY_H_ */

@@ -25,6 +25,7 @@ void update_entity(struct entity *entity, float delta, struct map *map)
         entity->pos.x = fti(entity->pos.x);
         entity->pos.y = fti(entity->pos.y) - 1;
     }
+    update_direction(entity);
 }
 
 void apply_gravity(struct entity *entity, float delta)
@@ -133,4 +134,12 @@ void delete_entity(struct map *map, struct entity entity)
     {
         map->entities[i] = map->entities[i+1];
     }
+}
+
+void update_direction(struct entity *entity)
+{
+    if(entity->spd.x < 0)
+        entity->dir = DIR_LEFT;
+    if(entity->spd.x < 0)
+        entity->dir = DIR_RIGHT;
 }
