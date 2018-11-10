@@ -107,7 +107,7 @@ void jump(struct entity *entity, float delta)
 
 void add_entity(struct map *map, struct entity entity)
 {
-    map->entities = realloc(map->entities, map->nbentities + 1);
+    map->entities = realloc(map->entities, sizeof(struct entity) * (map->nbentities + 1));
     map->entities[map->nbentities++] = entity;
 }
 
