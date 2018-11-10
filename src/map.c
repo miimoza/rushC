@@ -32,17 +32,21 @@ int get_height(char *path)
 struct map *parse_map(char *path, char *texture_path)
 {
     struct map *map = malloc(sizeof(struct map));
+    printf("spr\n");
     map->width = get_width(path);
+    printf("width: %d\n", map->width);
     map->height = get_height(path);
+    printf("height: %d\n", map->height);
     map->texture_path = texture_path;
     int size = map->width * map->height;
-    map->block = malloc(size * sizeof(char));
+    map->block = malloc(size * sizeof(enum blocktype));
     FILE *file;
     file = fopen(path, "r");
     char c;
     int i = 0;
     for (c = fgetc(file); c != EOF; c = fgetc(file), i++)
     {
+        printf("BOUCLE\n");
         if (c == '\n')
             c = fgetc(file);
         if (c == 'b')
