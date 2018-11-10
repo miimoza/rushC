@@ -207,7 +207,7 @@ void display_map(struct display *display, struct map *map)
     for(int entity_i = 0; entity_i < map->nbentities; entity_i++)
     {
         struct entity entity = map->entities[entity_i];
-        printf("entity : x: %f y: %f\n", entity.pos.x, entity.pos.y);
+        //printf("entity : x: %f y: %f\n", entity.pos.x, entity.pos.y);
         display_entity(display, entity);
     }
 
