@@ -1,4 +1,5 @@
 #include "entity.h"
+#include "vector2.h"
 
 void update_entity(struct entity *entity, float delta)
 {
