@@ -3,7 +3,9 @@
 #include "bullet.h"
 #include "map.h"
 #include "utils.h"
+#include "vector2.h"
 
+static int jump_value = 1;
 static int jump_count = 0;
 static int reload = RELOAD_TIME;
 void update_player(struct entity *player, struct map *map, struct input input)
@@ -18,7 +20,7 @@ void update_player(struct entity *player, struct map *map, struct input input)
     collision(player, map);
 
     if (is_on_floor(player, map))
-        jump_count = 1;
+        jump_count = jump_value;
 
     if (input.inputs[SPACE] && jump_count > 0)
     {
@@ -47,6 +49,12 @@ void update_map_entities(struct map *map)
         int x = map->entities[i].pos.x;
         int y = map->entities[i].pos.y;
         enum blocktype block = get_block(map, map->entities[i].pos);
+        struct vector2 right =
+        {
+            map->entities[i].pos.x + 1,
+            map->entities[i].pos.y
+        };
+        enum blocktype block_right = get_block(map, right);
 
         switch (map->entities[i].type)
         {
@@ -57,8 +65,10 @@ void update_map_entities(struct map *map)
                     delete_entity(map, i);
                 break;
             case ENEMY:
-                if (block != AIR)
+                if (block != AIR || block_right != AIR)
                     map->entities[i].spd.x *= -1;
+                apply_gravity(&map->entities[i], 1);
+                collision(&map->entities[i], map);
                 break;
             case GUN_PICKUP:
                 if (fti(map->entities[i].pos.x == xp
@@ -66,6 +76,12 @@ void update_map_entities(struct map *map)
                     delete_entity(map, i);
                 break;
             case DOUBLE_JUMP_PICKUP:
+                if (fti(map->entities[i].pos.x == xp
+                            && fti(map->entities[i].pos.y == yp)))
+                {
+                    delete_entity(map, i);
+                    jump_value = 2;
+                }
                 break;
             default:
                 break;
