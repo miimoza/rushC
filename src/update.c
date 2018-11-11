@@ -67,8 +67,6 @@ void update_map_entities(struct map *map)
             case ENEMY:
                 if (block != AIR || block_right != AIR)
                     map->entities[i].spd.x *= -1;
-                apply_gravity(&map->entities[i], 1);
-                collision(&map->entities[i], map);
                 break;
             case GUN_PICKUP:
                 if (fti(map->entities[i].pos.x == xp
