@@ -32,6 +32,7 @@ int main(void)
 
     while (game->is_playing)
     {
+        SDL_RenderClear(display->renderer);
         //INPUT
         printf("frame\n" );
         input = get_inputs();
@@ -55,6 +56,8 @@ int main(void)
         //DRAW
         display_map(display, map);
         display_life(display);
+
+        SDL_RenderPresent(display->renderer);
         SDL_Delay(20);
     }
 

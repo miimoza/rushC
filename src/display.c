@@ -170,6 +170,7 @@ void display_life_bar(SDL_Renderer *renderer, int life, int life_max)
     int i = 0;
     for(; i < life; i++)
     {
+        printf("coeur\n" );
         int posx = i * BLOCK_SIZE;
         int posy = 0;
         SDL_Rect texr = { .x = posx, .y = posy, .w = BLOCK_SIZE, .h = BLOCK_SIZE };
@@ -212,11 +213,11 @@ void display_menu(SDL_Renderer *renderer)
     SDL_RenderCopy(renderer, menu, NULL, &texr);
     SDL_RenderPresent(renderer);
 
+
 }
 
 void display_map(struct display *display, struct map *map)
 {
-    SDL_RenderClear(display->renderer);
     display_background(display->renderer, display->background, map->width, map->height);
 
     for(int entity_i = 0; entity_i < map->nbentities; entity_i++)
@@ -237,6 +238,4 @@ void display_map(struct display *display, struct map *map)
 
 
     display_entity(display, map->player);
-
-    SDL_RenderPresent(display->renderer);
 }
