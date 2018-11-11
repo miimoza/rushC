@@ -37,7 +37,17 @@ void update_frame(struct map *map)
 
     for(int entity_i = 0; entity_i < map->nbentities; entity_i++)
     {
-        update_entity(&map->entities[entity_i], 1);
+        if(map->entities[entity_i].type == ENEMY)
+        {
+            apply_gravity(&map->entities[entity_i], 1);
+            update_entity(&map->entities[entity_i], 1);
+            collision(&map->entities[entity_i], map);
+        }
+        else
+        {
+            update_entity(&map->entities[entity_i], 1);
+        }
+
         if(is_outside_map(map->entities[entity_i], map->width, map->height))
             delete_entity(map, entity_i);
     }
