@@ -18,7 +18,7 @@ void update_player(struct entity *player, struct map *map, struct input input)
     collision(player, map);
 
     if (is_on_floor(player, map))
-        jump_count = 1;
+        jump_count = 2;
 
     if (input.inputs[SPACE] && jump_count > 0)
     {
@@ -46,18 +46,17 @@ void update_map_entities(struct map *map)
         int yp = map->player.pos.y + 0.5;
         int x = map->entities[i].pos.x;
         int y = map->entities[i].pos.y;
+        enum blocktype block = get_block(map, map->entities[i].pos);
 
         switch (map->entities[i].type)
         {
-            case BULLET: ;
-                enum blocktype block = get_block(map, map->entities[i].pos);
+            case BULLET:
                 if (block == DBLOCK)
                     map->block[x + map->width * y] = AIR;
                 if (block != AIR)
                     delete_entity(map, i);
                 break;
-            case ENEMY: ;
-                enum blocktype block = get_block(map, map->entities[i].pos);
+            case ENEMY:
                 if (block != AIR)
                     map->entities[i].spd.x *= -1;
                 break;
