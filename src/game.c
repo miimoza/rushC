@@ -1,23 +1,39 @@
 #include "structs.h"
 #include "entity.h"
+#include "map.h"
+
 struct GameContext *init_game()
 {
     struct GameContext *game = malloc(sizeof(struct GameContext));
-    //game.maps = parse_maps(&game.nb_maps);
-    //game.map = game.maps[game.cur_map];
 
+    char *maps[] =
+    {
+        "maps/lvl0.ez",
+        "maps/lvl1.ez",
+        "maps/lvl2.ez",
+        "maps/lvl3.ez"
+    };
+
+    char *textures[] =
+    {
+        "maps/lvl1_textures/",
+        "maps/lvl1_textures/",
+        "maps/lvl1_textures/",
+        "maps/lvl1_textures/"
+    };
+
+    game->cur_map = 0;
+    game->nb_maps = 4;
+    game->maps = parse_maps(maps, game->nb_maps, textures);
+    game->map = game->maps[game->cur_map];
     game->is_playing = 1;
-    //game.cur_map = 0;
-
-    //game.display = init_display(game.map->width, game.map->height);
-    //load_textures(game.display, game.map->texture_path);
 
     return game;
 }
 
 void update_frame(struct map *map)
 {
-    
+
 
     for(int entity_i = 0; entity_i < map->nbentities; entity_i++)
     {

@@ -11,14 +11,13 @@
 int main(void)
 {
     printf("test\n" );
-
-    struct map *map = parse_map("maps/lvl1.ez", "maps/lvl1_textures/");
-    struct display *display = init_display(map->width, map->height);
-    load_textures(display, map->texture_path);
-    //display_map(display, map);
-    //SDL_Delay(10000);
-
     struct GameContext *game = init_game();
+    struct map *map = game->map;
+    struct display *display = init_display(map->width, map->height);
+    
+    load_textures(display, map->texture_path);
+
+
     struct input input;
 
     while (game->is_playing)
@@ -29,9 +28,13 @@ int main(void)
         game->is_playing = !input.inputs[QUIT];
 
         //UPDATE
-
+        printf("x: %f y: %f\n", map->player.pos.x, map->player.pos.y);
         if(is_outside_map(map->player, map->width, map->height))
+        {
+            printf("GO NEXT MAP\n");
             go_next_map(game);
+            load_textures(display, map->texture_path);
+        }
 
         update_frame(map);
         update_map_entities(map);

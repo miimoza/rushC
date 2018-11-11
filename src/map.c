@@ -101,8 +101,8 @@ struct map *parse_map(char *path, char *texture_path)
 struct map **parse_maps(char **path, int size, char **texture_path)
 {
     struct map **array_map = malloc(size * sizeof(char *));
-    int i = 0;
-    for (; path[i]; i++)
+
+    for (int i = 0; i < size; i++)
     {
         array_map[i] = parse_map(path[i], texture_path[i]);
     }
