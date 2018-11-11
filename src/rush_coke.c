@@ -19,6 +19,16 @@ int main(void)
 
 
     struct input input;
+    display_menu(display->renderer);
+
+    while(1)
+    {
+        input = get_inputs();
+        if(input.inputs[SPACE])
+            break;
+        if(input.inputs[QUIT])
+            exit(0);
+    }
 
     while (game->is_playing)
     {
@@ -31,7 +41,6 @@ int main(void)
         printf("x: %f y: %f\n", map->player.pos.x, map->player.pos.y);
         if(is_outside_map(map->player, map->width, map->height))
         {
-            printf("GO NEXT MAP\n");
             go_next_map(game);
             map = game->map;
             load_textures(display, map->texture_path);

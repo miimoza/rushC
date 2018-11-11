@@ -191,6 +191,28 @@ void display_life_bar(SDL_Renderer *renderer, int life, int life_max)
 
 }
 
+void display_menu(SDL_Renderer *renderer)
+{
+    SDL_Texture *menu = IMG_LoadTexture(renderer, "textures/menu.png");
+
+    SDL_RenderClear(renderer);
+
+    int posx = 0;
+    int posy = 0;
+    SDL_Rect texr =
+    {
+        .x = posx,
+        .y = posy,
+        .w = 768,
+        .h = 512
+    };
+
+
+    SDL_QueryTexture(menu, NULL, NULL, &posx, &posy);
+    SDL_RenderCopy(renderer, menu, NULL, &texr);
+    SDL_RenderPresent(renderer);
+
+}
 
 void display_map(struct display *display, struct map *map)
 {
@@ -203,7 +225,7 @@ void display_map(struct display *display, struct map *map)
         //printf("entity : x: %f y: %f\n", entity.pos.x, entity.pos.y);
         display_entity(display, entity);
     }
-    
+
     for(int y = 0; y < map->height; y++)
     {
         for(int x = 0; x < map->width; x++)
