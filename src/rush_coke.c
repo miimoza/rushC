@@ -6,7 +6,7 @@
 #include "input.h"
 #include "entity.h"
 #include "map.h"
-#include "player.h"
+#include "update.h"
 
 int main(void)
 {
@@ -29,10 +29,12 @@ int main(void)
         game->is_playing = !input.inputs[QUIT];
 
         //UPDATE
+
         if(is_outside_map(map->player, map->width, map->height))
             go_next_map(game);
-            
+
         update_frame(map);
+        update_map_entities(map);
         update_player(&map->player, map, input);
 
 
@@ -40,6 +42,7 @@ int main(void)
         //printf("PLAYER X: %f, PLAYER Y: %f", .pos.x, player.pos.y);
 
         //DRAW
+        update_frame(map);
         display_map(display, map);
         SDL_Delay(20);
     }

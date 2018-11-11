@@ -196,6 +196,14 @@ void display_map(struct display *display, struct map *map)
 {
     SDL_RenderClear(display->renderer);
     display_background(display->renderer, display->background, map->width, map->height);
+
+    for(int entity_i = 0; entity_i < map->nbentities; entity_i++)
+    {
+        struct entity entity = map->entities[entity_i];
+        //printf("entity : x: %f y: %f\n", entity.pos.x, entity.pos.y);
+        display_entity(display, entity);
+    }
+    
     for(int y = 0; y < map->height; y++)
     {
         for(int x = 0; x < map->width; x++)
@@ -205,12 +213,7 @@ void display_map(struct display *display, struct map *map)
         }
     }
 
-    for(int entity_i = 0; entity_i < map->nbentities; entity_i++)
-    {
-        struct entity entity = map->entities[entity_i];
-        //printf("entity : x: %f y: %f\n", entity.pos.x, entity.pos.y);
-        display_entity(display, entity);
-    }
+
     display_life_bar(display->renderer, 5, 10);
     display_entity(display, map->player);
 
