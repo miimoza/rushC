@@ -14,7 +14,7 @@ int main(void)
     struct GameContext *game = init_game();
     struct map *map = game->map;
     struct display *display = init_display(map->width, map->height);
-    
+
     load_textures(display, map->texture_path);
 
 
@@ -33,6 +33,7 @@ int main(void)
         {
             printf("GO NEXT MAP\n");
             go_next_map(game);
+            map = game->map;
             load_textures(display, map->texture_path);
         }
 
