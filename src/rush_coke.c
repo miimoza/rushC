@@ -29,11 +29,12 @@ int main(void)
         game->is_playing = !input.inputs[QUIT];
 
         //UPDATE
-        update_frame(map);
+        update_map_entities(map);
         update_player(&map->player, map, input);
         //printf("PLAYER X: %f, PLAYER Y: %f", .pos.x, player.pos.y);
 
         //DRAW
+        update_frame(map);
         display_map(display, map);
         SDL_Delay(20);
     }

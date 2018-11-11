@@ -1,6 +1,8 @@
 #include "update.h"
 #include "entity.h"
 #include "bullet.h"
+#include "map.h"
+#include "utils.h"
 
 static int jump_count = 0;
 static int reload = RELOAD_TIME;
@@ -24,7 +26,6 @@ void update_player(struct entity *player, struct map *map, struct input input)
         jump_count--;
     }
 
-
     reload -= 1;
     if(reload < 0)
     {
@@ -36,3 +37,31 @@ void update_player(struct entity *player, struct map *map, struct input input)
     printf("direction : %d %d\n", player->dir, reload);
     update_direction(player);
 }
+
+void update_map_entities(struct map *map)
+{
+    for (int i = 0; i < map->nbentities; i++)
+    {
+        switch (map->entities[i].type)
+        {
+            case BULLET: ;
+                int x = map->entities[i].pos.x;
+                int y = map->entities[i].pos.y;
+                enum blocktype block = get_block(map, map->entities[i].pos);
+                if (block == DBLOCK)
+                    map->block[x + map->width * y] = AIR;
+                if (block != AIR)
+                    delete_entity(map, i);
+                break;
+            case ENEMY:
+                break;
+            case GUN_PICKUP:
+                break;
+            case DOUBLE_JUMP_PICKUP:
+                break;
+            default:
+                break;
+        }
+    }
+}
+
