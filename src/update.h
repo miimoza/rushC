@@ -6,5 +6,6 @@
 void display_life(struct display *display);
 void update_player(struct entity *player, struct map *map, struct input input);
 void update_map_entities(struct map *map);
+int get_gamestate(struct GameContext *game);
 
 #endif /* !UPDATE_H_ */

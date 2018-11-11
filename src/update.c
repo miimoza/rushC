@@ -16,6 +16,14 @@ static int life = 3;
 static int life_max = 10;
 static int gun = 0;
 
+int get_gamestate(struct GameContext *game)
+{
+    if(game->cur_map == game->nb_maps)
+        return 3;
+    if(life == 0)
+        return 2;
+    return 1;
+}
 void display_life(struct display *display)
 {
     display_life_bar(display->renderer, life, life_max);
@@ -139,4 +147,3 @@ void update_map_entities(struct map *map)
         }
     }
 }
-

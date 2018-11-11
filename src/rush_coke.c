@@ -30,7 +30,7 @@ int main(void)
             exit(0);
     }
 
-    while (game->is_playing)
+    while (game->is_playing == 1)
     {
         SDL_RenderClear(display->renderer);
         //INPUT
@@ -51,6 +51,7 @@ int main(void)
         update_map_entities(map);
         update_player(&map->player, map, input);
 
+        game->is_playing = get_gamestate(game);
         //printf("PLAYER X: %f, PLAYER Y: %f", .pos.x, player.pos.y);
 
         //DRAW
@@ -61,6 +62,23 @@ int main(void)
         SDL_Delay(20);
     }
 
+    if(game->is_playing == 2)
+    {
+        display_gameover(display->renderer);
+    }
+
+    if(game->is_playing == 3)
+    {
+        display_finish(display->renderer);
+    }
+
+    while(1)
+    {
+        input = get_inputs();
+        if(input.inputs[QUIT])
+            break;
+        SDL_Delay(20);
+    }
     //free
     //free game
     free(game);
