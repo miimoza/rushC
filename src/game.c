@@ -8,18 +8,18 @@ struct GameContext *init_game()
 
     char *maps[] =
     {
-        "maps/lvl0.ez",
         "maps/lvl1.ez",
         "maps/lvl2.ez",
-        "maps/lvl3.ez"
+        "maps/lvl3.ez",
+        "maps/lvl4.ez"
     };
 
     char *textures[] =
     {
         "maps/lvl1_textures/",
-        "maps/lvl1_textures/",
-        "maps/lvl1_textures/",
-        "maps/lvl1_textures/"
+        "maps/lvl2_textures/",
+        "maps/lvl3_textures/",
+        "maps/lvl4_textures/"
     };
 
     game->cur_map = 0;
