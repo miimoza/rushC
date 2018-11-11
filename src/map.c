@@ -97,6 +97,11 @@ struct map *parse_map(char *path, char *texture_path)
             map->entities[map->nbentities++]
                 = create_entity(DOUBLE_JUMP_PICKUP, x, y);
         }
+        else if (c == 'c')
+        {
+            map->entities[map->nbentities++]
+                = create_entity(COKE, x, y);
+        }
 
     }
     fclose(file);
