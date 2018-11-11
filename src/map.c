@@ -119,6 +119,9 @@ enum blocktype get_block(struct map *map, struct vector2 vec)
 
 struct entity create_entity(enum entitytype type, int x, int y)
 {
+    float spd_x = 0;
+    if (type == ENEMY)
+        spd_x = 0.1;
     struct vector2 vec_pos =
     {
         x,
@@ -126,7 +129,7 @@ struct entity create_entity(enum entitytype type, int x, int y)
     };
     struct vector2 vec_spd =
     {
-        0,
+        spd_x,
         0
     };
     struct vector2 vec_acc =
