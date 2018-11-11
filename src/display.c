@@ -236,7 +236,6 @@ void display_map(struct display *display, struct map *map)
     }
 
 
-    display_life_bar(display->renderer, 5, 10);
     display_entity(display, map->player);
 
     SDL_RenderPresent(display->renderer);

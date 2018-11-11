@@ -27,6 +27,7 @@ struct GameContext *init_game()
     game->maps = parse_maps(maps, game->nb_maps, textures);
     game->map = game->maps[game->cur_map];
     game->is_playing = 1;
+    game->life = {3, 10};
 
     return game;
 }
