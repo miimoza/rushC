@@ -9,6 +9,7 @@
 
 
 void update_entity(struct entity *entity, float delta);
+int entities_contact(struct entity *ent1, struct entity *ent2);
 void collision(struct entity *entity, struct map *map);
 void collision_enemy(struct entity *entity, struct map *map);
 void apply_gravity(struct entity *entity, float delta);
@@ -18,7 +19,6 @@ void jump(struct entity *entity, float delta);
 void add_entity(struct map *map, struct entity entity);
 void update_direction(struct entity *entity);
 void delete_entity(struct map *map, int i);
-void add_entity(struct map *map, struct entity entity);
 int is_outside_map(struct entity entity, int map_width, int map_height);
 
 #endif /* !ENTITY_H_ */

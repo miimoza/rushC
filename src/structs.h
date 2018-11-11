@@ -6,7 +6,7 @@
 
 #define NUMBER_KEYS 5
 #define BLOCK_SIZE 32
-#define NB_ENT_TYPES 5
+#define NB_ENT_TYPES 6
 #define NB_BLK_TYPES 4
 #define RELOAD_TIME 8
 
@@ -32,7 +32,8 @@ enum entitytype
     ENEMY,
     BULLET,
     GUN_PICKUP,
-    DOUBLE_JUMP_PICKUP
+    DOUBLE_JUMP_PICKUP,
+    COKE
 };
 
 enum direction

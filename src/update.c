@@ -6,11 +6,15 @@
 #include "vector2.h"
 #include "display.h"
 
+#define RELOAD_LIFE 40
+
+static int invulnerability = RELOAD_LIFE;
 static int jump_value = 1;
 static int jump_count = 0;
 static int reload = RELOAD_TIME;
 static int life = 2;
 static int life_max = 10;
+static int gun = 0;
 
 void display_life(struct display *display)
 {
@@ -37,11 +41,18 @@ void update_player(struct entity *player, struct map *map, struct input input)
         jump_count--;
     }
 
+    if (get_block(map, player->pos) && invulnerability >= RELOAD_LIFE)
+    {
+        life--;
+        invulnerability = 0;
+    }
+    invulnerability++;
+
     reload -= 1;
     if(reload < 0)
     {
         reload = RELOAD_TIME;
-        if (input.inputs[SHOOT])
+        if (gun && input.inputs[SHOOT])
             shot_bullet(map, player);
     }
 
@@ -72,6 +83,17 @@ void update_map_entities(struct map *map)
                     map->block[x + map->width * y] = AIR;
                 if (block != AIR)
                     delete_entity(map, i);
+                for (int j = 0; j < map->nbentities; j++)
+                {
+                    if (entities_contact(&map->entities[i], &map->entities[j]))
+                    {
+                        if (map->entities[j].type == ENEMY)
+                        {
+                            map->entities[j].type = COKE;
+                            delete_entity(map, i);
+                        }
+                    }
+                }
                 break;
             case ENEMY:
                 if (block != AIR)
@@ -82,7 +104,10 @@ void update_map_entities(struct map *map)
             case GUN_PICKUP:
                 if (fti(map->entities[i].pos.x == xp
                             && fti(map->entities[i].pos.y == yp)))
+                {
                     delete_entity(map, i);
+                    gun = 1;
+                }
                 break;
             case DOUBLE_JUMP_PICKUP:
                 if (fti(map->entities[i].pos.x == xp
@@ -92,6 +117,14 @@ void update_map_entities(struct map *map)
                     jump_value = 2;
                 }
                 break;
+            case COKE:
+                if (fti(map->entities[i].pos.x == xp
+                            && fti(map->entities[i].pos.y == yp)))
+                {
+                    delete_entity(map, i);
+                }
+                break;
+
             default:
                 break;
         }

@@ -107,6 +107,9 @@ void load_ent_texture(struct display *display, enum entitytype ent_type, char *t
         case DOUBLE_JUMP_PICKUP:
             strcat(buffer, "double_jump_pickup.png");
             break;
+        case COKE:
+            strcat(buffer, "coke.png");
+            break;
     }
 
     display->ent_textures[ent_type] = IMG_LoadTexture(display->renderer, buffer);

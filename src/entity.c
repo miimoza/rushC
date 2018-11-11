@@ -13,6 +13,14 @@ void update_entity(struct entity *entity, float delta)
     update_direction(entity);
 }
 
+int entities_contact(struct entity *ent1, struct entity *ent2)
+{
+    struct vector2 vect1 = {ent1->pos.x, ent1->pos.y};
+    struct vector2 vect2 = {ent2->pos.x, ent2->pos.y};
+
+    return fti(vect1.x) == fti(vect2.x) && fti(vect1.y) == fti(vect2.y);
+}
+
 int entity_collide(struct entity *entity, struct map *map)
 {
     int res = 0;
