@@ -216,9 +216,52 @@ void display_menu(SDL_Renderer *renderer)
     SDL_QueryTexture(menu, NULL, NULL, &posx, &posy);
     SDL_RenderCopy(renderer, menu, NULL, &texr);
     SDL_RenderPresent(renderer);
-
-
 }
+
+void display_gameover(SDL_Renderer *renderer)
+{
+    SDL_Texture *gameover = IMG_LoadTexture(renderer, "textures/gameover.png");
+
+    SDL_RenderClear(renderer);
+
+    int posx = 0;
+    int posy = 0;
+    SDL_Rect texr =
+    {
+        .x = posx,
+        .y = posy,
+        .w = 768,
+        .h = 512
+    };
+
+
+    SDL_QueryTexture(gameover, NULL, NULL, &posx, &posy);
+    SDL_RenderCopy(renderer, gameover, NULL, &texr);
+    SDL_RenderPresent(renderer);
+}
+
+void display_finish(SDL_Renderer *renderer)
+{
+    SDL_Texture *finish = IMG_LoadTexture(renderer, "textures/finish.png");
+
+    SDL_RenderClear(renderer);
+
+    int posx = 0;
+    int posy = 0;
+    SDL_Rect texr =
+    {
+        .x = posx,
+        .y = posy,
+        .w = 768,
+        .h = 512
+    };
+
+
+    SDL_QueryTexture(finish, NULL, NULL, &posx, &posy);
+    SDL_RenderCopy(renderer, finish, NULL, &texr);
+    SDL_RenderPresent(renderer);
+}
+
 
 void display_map(struct display *display, struct map *map)
 {

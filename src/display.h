@@ -14,5 +14,7 @@ void display_map(struct display *display, struct map *map);
 void load_textures(struct display *display, char *textures_path);
 void display_menu(SDL_Renderer *renderer);
 void display_life_bar(SDL_Renderer *renderer, int life, int life_max);
+void display_gameover(SDL_Renderer *renderer);
+void display_finish(SDL_Renderer *renderer);
 
 #endif /* !DISPLAY_H_ */
