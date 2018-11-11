@@ -8,8 +8,11 @@ struct display *init_display(int width, int height)
 {
     struct display *display = malloc(sizeof(struct display));
 
-    display->window = SDL_CreateWindow("Rush Coke", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width * BLOCK_SIZE, height * BLOCK_SIZE, SDL_WINDOW_SHOWN);
-    display->renderer = SDL_CreateRenderer(display->window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+    display->window = SDL_CreateWindow("Rush Coke", SDL_WINDOWPOS_UNDEFINED
+            , SDL_WINDOWPOS_UNDEFINED, width * BLOCK_SIZE
+            , height * BLOCK_SIZE, SDL_WINDOW_SHOWN);
+    display->renderer = SDL_CreateRenderer(display->window, -1
+            , SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
     display->blk_textures = NULL;
     display->ent_textures = NULL;
     return display;
@@ -22,7 +25,8 @@ void end_display(struct display *display)
 }
 
 
-void display_blk(struct display *display, enum blocktype blocktype, int x, int y)
+void display_blk(struct display *display, enum blocktype blocktype
+        , int x, int y)
 {
 
     SDL_Texture *texture = display->blk_textures[blocktype];
@@ -64,7 +68,8 @@ void display_entity(struct display *display, struct entity entity)
 }
 
 
-void load_blk_texture(struct display *display, enum blocktype blk_type, char *textures_path)
+void load_blk_texture(struct display *display, enum blocktype blk_type
+        , char *textures_path)
 {
     char buffer[4096];
     strcpy(buffer, textures_path);
@@ -83,10 +88,12 @@ void load_blk_texture(struct display *display, enum blocktype blk_type, char *te
             break;
     }
 
-    display->blk_textures[blk_type] = IMG_LoadTexture(display->renderer, buffer);
+    display->blk_textures[blk_type]
+        = IMG_LoadTexture(display->renderer, buffer);
 }
 
-void load_ent_texture(struct display *display, enum entitytype ent_type, char *textures_path)
+void load_ent_texture(struct display *display, enum entitytype ent_type
+        , char *textures_path)
 {
     char buffer[4096];
     strcpy(buffer, textures_path);
@@ -112,7 +119,8 @@ void load_ent_texture(struct display *display, enum entitytype ent_type, char *t
             break;
     }
 
-    display->ent_textures[ent_type] = IMG_LoadTexture(display->renderer, buffer);
+    display->ent_textures[ent_type]
+        = IMG_LoadTexture(display->renderer, buffer);
 }
 
 void load_background(struct display *display, char *textures_path)
@@ -144,7 +152,8 @@ void load_textures(struct display *display, char *textures_path)
     return;
 }
 
-void display_background(SDL_Renderer *renderer, SDL_Texture *background, int width, int height)
+void display_background(SDL_Renderer *renderer, SDL_Texture *background
+        , int width, int height)
 {
 
     for(int y = 0; y < height; y++)
@@ -169,15 +178,19 @@ void display_background(SDL_Renderer *renderer, SDL_Texture *background, int wid
 }
 void display_life_bar(SDL_Renderer *renderer, int life, int life_max)
 {
-    SDL_Texture *hearth_full = IMG_LoadTexture(renderer, "textures/hearth_full.png");
-    SDL_Texture *hearth_empty = IMG_LoadTexture(renderer, "textures/hearth_empty.png");
+    SDL_Texture *hearth_full = IMG_LoadTexture(renderer
+            , "textures/hearth_full.png");
+    SDL_Texture *hearth_empty = IMG_LoadTexture(renderer
+            , "textures/hearth_empty.png");
     int i = 0;
     for(; i < life; i++)
     {
-        printf("coeur\n" );
         int posx = i * BLOCK_SIZE;
         int posy = 0;
-        SDL_Rect texr = { .x = posx, .y = posy, .w = BLOCK_SIZE, .h = BLOCK_SIZE };
+        SDL_Rect texr =
+        {
+            .x = posx, .y = posy, .w = BLOCK_SIZE, .h = BLOCK_SIZE
+        };
 
         SDL_QueryTexture(hearth_full, NULL, NULL, &posx, &posy);
         SDL_RenderCopy(renderer, hearth_full, NULL, &texr);
@@ -187,7 +200,10 @@ void display_life_bar(SDL_Renderer *renderer, int life, int life_max)
     {
         int posx = i * BLOCK_SIZE;
         int posy = 0;
-        SDL_Rect texr = { .x = posx, .y = posy, .w = BLOCK_SIZE, .h = BLOCK_SIZE };
+        SDL_Rect texr =
+        {
+            .x = posx, .y = posy, .w = BLOCK_SIZE, .h = BLOCK_SIZE
+        };
 
         SDL_QueryTexture(hearth_empty, NULL, NULL, &posx, &posy);
         SDL_RenderCopy(renderer, hearth_empty, NULL, &texr);
@@ -265,12 +281,12 @@ void display_finish(SDL_Renderer *renderer)
 
 void display_map(struct display *display, struct map *map)
 {
-    display_background(display->renderer, display->background, map->width, map->height);
+    display_background(display->renderer, display->background
+            , map->width, map->height);
 
     for(int entity_i = 0; entity_i < map->nbentities; entity_i++)
     {
         struct entity entity = map->entities[entity_i];
-        //printf("entity : x: %f y: %f\n", entity.pos.x, entity.pos.y);
         display_entity(display, entity);
     }
 

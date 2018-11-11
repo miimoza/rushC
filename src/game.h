@@ -4,7 +4,6 @@
 #include "structs.h"
 
 struct GameContext *init_game();
-//void update(struct GameContext *game, struct Input event);
 void update_frame(struct map *map);
 void go_next_map(struct GameContext *game);
 

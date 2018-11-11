@@ -3,7 +3,6 @@
 
 void shot_bullet(struct map *map, struct entity *player)
 {
-    printf("shot !\n");
     struct vector2 speed = {0, 0};
 
     if(player->dir == DIR_LEFT)

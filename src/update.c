@@ -63,7 +63,6 @@ void update_player(struct entity *player, struct map *map, struct input input)
             shot_bullet(map, player);
     }
 
-    printf("direction : %d %d\n", player->dir, reload);
     update_direction(player);
 
     if (input.inputs[NEXT])

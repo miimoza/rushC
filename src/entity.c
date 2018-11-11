@@ -31,15 +31,12 @@ int entity_collide(struct entity *entity, struct map *map)
     pos.x += half;
     pos.y += half;
 
-    printf("pos x %f y %f\n", pos.x, pos.y);
 
     struct vector2 top = {pos.x, pos.y - half};
     struct vector2 right = {pos.x + half , pos.y};
     struct vector2 down = {pos.x, pos.y + half};
     struct vector2 left = {pos.x - half, pos.y};
 
-    printf("pos lx %f ly %f\n", left.x, left.y);
-    printf("pos rx %f ry %f\n", right.x, right.y);
 
 
     enum blocktype top_blk = get_block(map, top);
@@ -63,7 +60,6 @@ int entity_collide(struct entity *entity, struct map *map)
 void collision_enemy(struct entity *entity, struct map *map)
 {
     int collider = entity_collide(entity, map);
-    printf("collider :%d\n", collider);
 
 
     if (collider & COL_DOWN)
@@ -77,7 +73,6 @@ void collision_enemy(struct entity *entity, struct map *map)
 void collision(struct entity *entity, struct map *map)
 {
     int collider = entity_collide(entity, map);
-    printf("collider :%d\n", collider);
 
     if (collider & COL_LEFT)
     {
@@ -134,7 +129,8 @@ void jump(struct entity *entity, float delta)
 
 void add_entity(struct map *map, struct entity entity)
 {
-    map->entities = realloc(map->entities, sizeof(struct entity) * (map->nbentities + 1));
+    map->entities = realloc(map->entities, sizeof(struct entity)
+            * (map->nbentities + 1));
     map->entities[map->nbentities++] = entity;
 }
 
@@ -145,7 +141,8 @@ void delete_entity(struct map *map, int i)
         map->entities[i] = map->entities[i+1];
 
     map->nbentities--;
-    map->entities = realloc(map->entities, sizeof(struct entity) * map->nbentities);
+    map->entities = realloc(map->entities, sizeof(struct entity)
+            * map->nbentities);
 }
 
 void update_direction(struct entity *entity)

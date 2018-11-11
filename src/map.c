@@ -51,9 +51,7 @@ struct map *parse_map(char *path, char *texture_path)
     map->nbentities = 0;
     map->entities = malloc(get_entitynb(path) * sizeof(struct entity));
     map->width = get_width(path);
-    printf("width: %d\n", map->width);
     map->height = get_height(path);
-    printf("height: %d\n", map->height);
     map->texture_path = texture_path;
     int size = map->width * map->height;
     map->block = malloc(size * sizeof(enum blocktype));
@@ -122,8 +120,6 @@ struct map **parse_maps(char **path, int size, char **texture_path)
 
 enum blocktype get_block(struct map *map, struct vector2 vec)
 {
-    printf("x of block: %f %d, y of block: %f %d\n",
-            vec.x, fti(vec.x), vec.y, fti(vec.y));
     if (vec.x < 0 || vec.x >= map->width
             || vec.y < 0 || vec.y >= map->height)
         return AIR;

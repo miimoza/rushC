@@ -10,7 +10,6 @@
 
 int main(void)
 {
-    printf("test\n" );
     struct GameContext *game = init_game();
     struct map *map = game->map;
     struct display *display = init_display(map->width, map->height);
@@ -34,12 +33,10 @@ int main(void)
     {
         SDL_RenderClear(display->renderer);
         //INPUT
-        printf("frame\n" );
         input = get_inputs();
         game->is_playing = !input.inputs[QUIT];
 
         //UPDATE
-        printf("x: %f y: %f\n", map->player.pos.x, map->player.pos.y);
         if(is_outside_map(map->player, map->width, map->height))
         {
 
@@ -59,7 +56,6 @@ int main(void)
         update_map_entities(map);
         update_player(&map->player, map, input);
         game->is_playing = get_gamestate();
-        //printf("PLAYER X: %f, PLAYER Y: %f", .pos.x, player.pos.y);
 
         //DRAW
         display_map(display, map);
