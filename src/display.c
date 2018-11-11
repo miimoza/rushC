@@ -163,18 +163,31 @@ void display_background(SDL_Renderer *renderer, SDL_Texture *background, int wid
         }
     }
 }
-void display_coke_bar(SDL_Renderer *renderer, int coke)
+void display_life_bar(SDL_Renderer *renderer, int life, int life_max)
 {
-    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-    SDL_Rect rect =
+    SDL_Texture *hearth_full = IMG_LoadTexture(renderer, "textures/hearth_full.png");
+    SDL_Texture *hearth_empty = IMG_LoadTexture(renderer, "textures/hearth_empty.png");
+    int i = 0;
+    for(; i < life; i++)
     {
-        .x = 8,
-        .y = 8,
-        .w = coke,
-        .h = 10
-    };
+        int posx = i * BLOCK_SIZE;
+        int posy = 0;
+        SDL_Rect texr = { .x = posx, .y = posy, .w = BLOCK_SIZE, .h = BLOCK_SIZE };
 
-    SDL_RenderFillRect(renderer, &rect);
+        SDL_QueryTexture(hearth_full, NULL, NULL, &posx, &posy);
+        SDL_RenderCopy(renderer, hearth_full, NULL, &texr);
+    }
+
+    for(; i < life_max; i++)
+    {
+        int posx = i * BLOCK_SIZE;
+        int posy = 0;
+        SDL_Rect texr = { .x = posx, .y = posy, .w = BLOCK_SIZE, .h = BLOCK_SIZE };
+
+        SDL_QueryTexture(hearth_empty, NULL, NULL, &posx, &posy);
+        SDL_RenderCopy(renderer, hearth_empty, NULL, &texr);
+    }
+
 
 }
 
@@ -198,7 +211,7 @@ void display_map(struct display *display, struct map *map)
         //printf("entity : x: %f y: %f\n", entity.pos.x, entity.pos.y);
         display_entity(display, entity);
     }
-    display_coke_bar(display->renderer, 250);
+    display_life_bar(display->renderer, 5, 10);
     display_entity(display, map->player);
 
     SDL_RenderPresent(display->renderer);

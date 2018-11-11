@@ -29,8 +29,14 @@ int main(void)
         game->is_playing = !input.inputs[QUIT];
 
         //UPDATE
+        if(is_outside_map(map->player, map->width, map->height))
+            go_next_map(game);
+            
         update_frame(map);
         update_player(&map->player, map, input);
+
+
+
         //printf("PLAYER X: %f, PLAYER Y: %f", .pos.x, player.pos.y);
 
         //DRAW
