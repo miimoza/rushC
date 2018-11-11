@@ -3,7 +3,7 @@
 #include "bullet.h"
 
 static int jump_count = 0;
-
+static int reload = RELOAD_TIME;
 void update_player(struct entity *player, struct map *map, struct input input)
 {
     player->spd.x = 0;
@@ -24,6 +24,15 @@ void update_player(struct entity *player, struct map *map, struct input input)
         jump_count--;
     }
 
-    if (input.inputs[SHOOT])
-        shot_bullet(map, player);
+
+    reload -= 1;
+    if(reload < 0)
+    {
+        reload = RELOAD_TIME;
+        if (input.inputs[SHOOT])
+            shot_bullet(map, player);
+    }
+
+    printf("direction : %d %d\n", player->dir, reload);
+    update_direction(player);
 }

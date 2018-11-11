@@ -114,7 +114,7 @@ enum blocktype get_block(struct map *map, struct vector2 vec)
 {
     printf("x of block: %f %d, y of block: %f %d\n",
             vec.x, fti(vec.x), vec.y, fti(vec.y));
-    return map->block[fti(vec.x + 0.5) + fti(vec.y) * map->width];
+    return map->block[fti(vec.x) + fti(vec.y) * map->width];
 }
 
 struct entity create_entity(enum entitytype type, int x, int y)

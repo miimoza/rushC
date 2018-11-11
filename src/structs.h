@@ -8,7 +8,7 @@
 #define BLOCK_SIZE 32
 #define NB_ENT_TYPES 5
 #define NB_BLK_TYPES 4
-#define RELOAD_TIME 500
+#define RELOAD_TIME 8
 
 struct vector2
 {
@@ -40,6 +40,14 @@ enum direction
     DIR_LEFT,
     DIR_RIGHT,
     NO_DIR
+};
+
+enum collider
+{
+    COL_UP = 1,
+    COL_RIGHT = 2,
+    COL_DOWN = 4,
+    COL_LEFT = 8
 };
 
 struct entity

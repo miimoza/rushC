@@ -14,20 +14,70 @@ void update_entity(struct entity *entity, float delta)
 
 }
 
+
+int entity_collide(struct entity *entity, struct map *map)
+{
+    int res = 0;
+
+    struct vector2 pos = entity->pos;
+    float half = 0.5;
+
+    pos.x += half;
+    pos.y += half;
+
+    printf("pos x %f y %f\n", pos.x, pos.y);
+
+    struct vector2 top = {pos.x, pos.y - half};
+    struct vector2 right = {pos.x + half , pos.y};
+    struct vector2 down = {pos.x, pos.y + half};
+    struct vector2 left = {pos.x - half, pos.y};
+
+    printf("pos lx %f ly %f\n", left.x, left.y);
+    printf("pos rx %f ry %f\n", right.x, right.y);
+
+
+    enum blocktype top_blk = get_block(map, top);
+    enum blocktype right_blk = get_block(map, right);
+    enum blocktype down_blk = get_block(map, down);
+    enum blocktype left_blk = get_block(map, left);
+
+    if(top_blk == BLOCK || top_blk == DBLOCK)
+        res += COL_UP;
+    if(right_blk == BLOCK || right_blk == DBLOCK)
+        res += COL_RIGHT;
+    if(down_blk == BLOCK || down_blk == DBLOCK)
+        res += COL_DOWN;
+    if(left_blk == BLOCK || left_blk == DBLOCK)
+        res += COL_LEFT;
+
+    return res;
+}
+
 void collision(struct entity *entity, struct map *map)
 {
-    if (is_on_right_wall(entity, map))
+    int collider = entity_collide(entity, map);
+    printf("collider :%d\n", collider);
+
+    if (collider & COL_LEFT)
     {
-        entity->spd.x = 0;
-        entity->pos.x = fti(entity->pos.x);
+        entity->acc.x = fmax(entity->acc.x, 0);
+        entity->spd.x = fmax(entity->spd.x, 0);
+        entity->pos.x = fti(entity->pos.x) + 1;
     }
-    if (is_on_floor(entity, map))
+    if (collider & COL_DOWN)
     {
         entity->acc.y = 0;
         entity->spd.y = 0;
         entity->pos.y = fti(entity->pos.y);
     }
-    if (is_on_ceilling(entity, map))
+    if (collider & COL_RIGHT)
+    {
+        entity->acc.x = fmin(entity->acc.x, 0);
+        entity->spd.x = fmin(entity->spd.x, 0);
+        entity->pos.x = fti(entity->pos.x);
+    }
+
+    if (collider & COL_UP)
     {
         entity->spd.y = 0;
         entity->pos.y = fti(entity->pos.y) + 1;
@@ -117,35 +167,31 @@ void add_entity(struct map *map, struct entity entity)
     map->entities[map->nbentities++] = entity;
 }
 
-int entities_are_equal(struct entity ent1, struct entity ent2)
+void delete_entity(struct map *map, int i)
 {
-    if(ent1.pos.x != ent2.pos.x)
-        return 0;
-    if(ent1.pos.y != ent2.pos.y)
-        return 0;
-    if(ent1.type != ent2.type)
-        return 0;
-    return 1;
-}
-void delete_entity(struct map *map, struct entity entity)
-{
-    int i = 0;
-    while(i < map->nbentities)
-    {
-        if(entities_are_equal(map->entities[i], entity))
-            break;
-        i++;
-    }
+
     for(; i < map->nbentities - 1; i++)
-    {
         map->entities[i] = map->entities[i+1];
-    }
+
+    map->nbentities--;
+    map->entities = realloc(map->entities, sizeof(struct entity) * map->nbentities);
 }
 
 void update_direction(struct entity *entity)
 {
     if(entity->spd.x < 0)
         entity->dir = DIR_LEFT;
-    if(entity->spd.x < 0)
+    if(entity->spd.x > 0)
         entity->dir = DIR_RIGHT;
+}
+
+int is_outside_map(struct entity entity, int map_width, int map_height)
+{
+    float x = entity.pos.x;
+    float y = entity.pos.y;
+    if(x < 0 || y < 0)
+        return 1;
+    if(x > map_width || y > map_height)
+        return 1;
+    return 0;
 }
