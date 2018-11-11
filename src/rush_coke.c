@@ -34,7 +34,8 @@ int main(void)
         SDL_RenderClear(display->renderer);
         //INPUT
         input = get_inputs();
-        game->is_playing = !input.inputs[QUIT];
+        if (input.inputs[QUIT])
+            exit(0);
 
         //UPDATE
         if(is_outside_map(map->player, map->width, map->height))
