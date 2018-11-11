@@ -94,7 +94,7 @@ void apply_gravity(struct entity *entity, float delta)
 
 int is_on_floor(struct entity *entity, struct map *map)
 {
-    return entity_collide(entity, map); 
+    return entity_collide(entity, map) & COL_DOWN;
 }
 
 void jump(struct entity *entity, float delta)
