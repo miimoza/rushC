@@ -56,7 +56,10 @@ void update_map_entities(struct map *map)
                 if (block != AIR)
                     delete_entity(map, i);
                 break;
-            case ENEMY:
+            case ENEMY: ;
+                enum blocktype block = get_block(map, map->entities[i].pos);
+                if (block != AIR)
+                    map->entities[i].spd.x *= -1;
                 break;
             case GUN_PICKUP:
                 if (fti(map->entities[i].pos.x == xp
