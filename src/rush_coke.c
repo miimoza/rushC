@@ -6,7 +6,7 @@
 #include "input.h"
 #include "entity.h"
 #include "map.h"
-#include "player.h"
+#include "update.h"
 
 int main(void)
 {

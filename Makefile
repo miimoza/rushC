@@ -14,7 +14,7 @@ OBJS = rush_coke.o \
 	   vector2.o \
 	   input.o \
 	   utils.o \
-	   player.o \
+	   update.o \
        bullet.o
 
 all: rush_coke
