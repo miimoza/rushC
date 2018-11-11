@@ -49,12 +49,12 @@ int main(void)
         update_frame(map);
         update_map_entities(map);
         update_player(&map->player, map, input);
-        display_life(display);
 
         //printf("PLAYER X: %f, PLAYER Y: %f", .pos.x, player.pos.y);
 
         //DRAW
         display_map(display, map);
+        display_life(display);
         SDL_Delay(20);
     }
 

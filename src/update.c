@@ -14,7 +14,7 @@ static int life_max = 10;
 
 void display_life(struct display *display)
 {
-    display_life_bar(display, life, life_max);
+    display_life_bar(display->renderer, life, life_max);
 }
 
 void update_player(struct entity *player, struct map *map, struct input input)
