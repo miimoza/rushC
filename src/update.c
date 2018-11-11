@@ -18,7 +18,7 @@ void update_player(struct entity *player, struct map *map, struct input input)
     collision(player, map);
 
     if (is_on_floor(player, map))
-        jump_count = 2;
+        jump_count = 1;
 
     if (input.inputs[SPACE] && jump_count > 0)
     {
