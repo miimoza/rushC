@@ -162,7 +162,7 @@ int is_outside_map(struct entity entity, int map_width, int map_height)
     float y = entity.pos.y;
     if(x < 0 || y < 0)
         return 1;
-    if(x > map_width || y > map_height)
+    if(x + 0.5 >= map_width || y + 0.5 >= map_height)
         return 1;
     return 0;
 }

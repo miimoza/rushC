@@ -139,6 +139,7 @@ void load_textures(struct display *display, char *textures_path)
     load_ent_texture(display, BULLET, textures_path);
     load_ent_texture(display, GUN_PICKUP, textures_path);
     load_ent_texture(display, DOUBLE_JUMP_PICKUP, textures_path);
+    load_ent_texture(display, COKE, textures_path);
 
     return;
 }

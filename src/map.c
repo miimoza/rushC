@@ -119,6 +119,9 @@ enum blocktype get_block(struct map *map, struct vector2 vec)
 {
     printf("x of block: %f %d, y of block: %f %d\n",
             vec.x, fti(vec.x), vec.y, fti(vec.y));
+    if (vec.x < 0 || vec.x >= map->width
+            || vec.y < 0 || vec.y >= map->height)
+        return AIR;
     return map->block[fti(vec.x) + fti(vec.y) * map->width];
 }
 

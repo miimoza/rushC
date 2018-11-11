@@ -12,7 +12,7 @@ static int invulnerability = RELOAD_LIFE;
 static int jump_value = 1;
 static int jump_count = 0;
 static int reload = RELOAD_TIME;
-static int life = 2;
+static int life = 3;
 static int life_max = 10;
 static int gun = 0;
 
@@ -23,6 +23,7 @@ void display_life(struct display *display)
 
 void update_player(struct entity *player, struct map *map, struct input input)
 {
+    life = fmax(0, life);
     player->spd.x = 0;
     if (input.inputs[RIGHT])
         player->spd.x = 0.15;
@@ -41,7 +42,7 @@ void update_player(struct entity *player, struct map *map, struct input input)
         jump_count--;
     }
 
-    if (get_block(map, player->pos) && invulnerability >= RELOAD_LIFE)
+    if (get_block(map, player->pos) == SPIKE && invulnerability >= RELOAD_LIFE)
     {
         life--;
         invulnerability = 0;
@@ -64,8 +65,8 @@ void update_map_entities(struct map *map)
 {
     for (int i = 0; i < map->nbentities; i++)
     {
-        int xp = map->player.pos.x + 0.5;
-        int yp = map->player.pos.y + 0.5;
+        int xp = map->player.pos.x;
+        int yp = map->player.pos.y;
         int x = map->entities[i].pos.x;
         int y = map->entities[i].pos.y;
         enum blocktype block = get_block(map, map->entities[i].pos);
@@ -90,6 +91,8 @@ void update_map_entities(struct map *map)
                         if (map->entities[j].type == ENEMY)
                         {
                             map->entities[j].type = COKE;
+                            map->entities[j].spd.x = 0;
+                            map->entities[j].spd.y = 0;
                             delete_entity(map, i);
                         }
                     }
@@ -100,6 +103,12 @@ void update_map_entities(struct map *map)
                     map->entities[i].spd.x = 0.1;
                 if (block_right != AIR)
                     map->entities[i].spd.x = -0.1;
+                if (invulnerability >= RELOAD_LIFE
+                        && entities_contact(&map->entities[i], &map->player))
+                {
+                    life--;
+                    invulnerability = 0;
+                }
                 break;
             case GUN_PICKUP:
                 if (fti(map->entities[i].pos.x == xp
@@ -118,10 +127,10 @@ void update_map_entities(struct map *map)
                 }
                 break;
             case COKE:
-                if (fti(map->entities[i].pos.x == xp
-                            && fti(map->entities[i].pos.y == yp)))
+                if (entities_contact(&map->entities[i], &map->player))
                 {
                     delete_entity(map, i);
+                    life++;
                 }
                 break;
 
