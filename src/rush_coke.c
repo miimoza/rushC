@@ -42,7 +42,15 @@ int main(void)
         printf("x: %f y: %f\n", map->player.pos.x, map->player.pos.y);
         if(is_outside_map(map->player, map->width, map->height))
         {
+
+            if (game->cur_map + 1 == game->nb_maps)
+            {
+                game->is_playing = 3;
+                break;
+            }
+
             go_next_map(game);
+
             map = game->map;
             load_textures(display, map->texture_path);
         }
@@ -51,7 +59,6 @@ int main(void)
         update_map_entities(map);
         update_player(&map->player, map, input);
 
-        game->is_playing = get_gamestate(game);
         //printf("PLAYER X: %f, PLAYER Y: %f", .pos.x, player.pos.y);
 
         //DRAW
