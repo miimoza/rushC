@@ -4,10 +4,19 @@
 #include "map.h"
 #include "utils.h"
 #include "vector2.h"
+#include "display.h"
 
 static int jump_value = 1;
 static int jump_count = 0;
 static int reload = RELOAD_TIME;
+static int life = 2;
+static int life_max = 10;
+
+void display_life(struct display *display)
+{
+    display_life_bar(display->renderer, life, life_max);
+}
+
 void update_player(struct entity *player, struct map *map, struct input input)
 {
     player->spd.x = 0;
@@ -65,8 +74,10 @@ void update_map_entities(struct map *map)
                     delete_entity(map, i);
                 break;
             case ENEMY:
-                if (block != AIR || block_right != AIR)
-                    map->entities[i].spd.x *= -1;
+                if (block != AIR)
+                    map->entities[i].spd.x = 0.1;
+                if (block_right != AIR)
+                    map->entities[i].spd.x = -0.1;
                 break;
             case GUN_PICKUP:
                 if (fti(map->entities[i].pos.x == xp

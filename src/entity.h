@@ -10,6 +10,7 @@
 
 void update_entity(struct entity *entity, float delta);
 void collision(struct entity *entity, struct map *map);
+void collision_enemy(struct entity *entity, struct map *map);
 void apply_gravity(struct entity *entity, float delta);
 int is_on_floor(struct entity *entity, struct map *map);
 

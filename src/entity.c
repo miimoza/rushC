@@ -51,6 +51,21 @@ int entity_collide(struct entity *entity, struct map *map)
     return res;
 }
 
+
+void collision_enemy(struct entity *entity, struct map *map)
+{
+    int collider = entity_collide(entity, map);
+    printf("collider :%d\n", collider);
+
+
+    if (collider & COL_DOWN)
+    {
+        entity->acc.y = 0;
+        entity->spd.y = 0;
+        entity->pos.y = fti(entity->pos.y);
+    }
+}
+
 void collision(struct entity *entity, struct map *map)
 {
     int collider = entity_collide(entity, map);
