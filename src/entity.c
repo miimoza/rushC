@@ -11,7 +11,6 @@ void update_entity(struct entity *entity, float delta)
     entity->spd = add_vect(entity->spd, scale_vect(delta, entity->acc));
 
     update_direction(entity);
-
 }
 
 int entity_collide(struct entity *entity, struct map *map)
