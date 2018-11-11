@@ -12,8 +12,6 @@ void update_entity(struct entity *entity, float delta);
 void collision(struct entity *entity, struct map *map);
 void apply_gravity(struct entity *entity, float delta);
 int is_on_floor(struct entity *entity, struct map *map);
-int is_on_ceilling(struct entity *entity, struct map *map);
-int is_on_right_wall(struct entity *entity, struct map *map);
 
 void jump(struct entity *entity, float delta);
 void add_entity(struct map *map, struct entity entity);
