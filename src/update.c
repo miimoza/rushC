@@ -16,10 +16,8 @@ static int life = 3;
 static int life_max = 10;
 static int gun = 0;
 
-int get_gamestate(struct GameContext *game)
+int get_gamestate()
 {
-    if(game->cur_map == game->nb_maps)
-        return 3;
     if(life == 0)
         return 2;
     return 1;
