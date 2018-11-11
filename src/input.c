@@ -20,11 +20,7 @@ struct input get_inputs()
         input.inputs[RIGHT] = 1;
     if (state[SDL_SCANCODE_S])
         input.inputs[SHOOT] = 1;
-    /*printf("Inputs:\n");
-    /printf("QUIT: %d, SPACE: %d, LEFT: %d, RIGHT: %d\n",
-            input.inputs[QUIT],
-            input.inputs[SPACE],
-            input.inputs[LEFT],
-            input.inputs[RIGHT]);*/
+    if (state[SDL_SCANCODE_N])
+        input.inputs[NEXT] = 1;
     return input;
 }

@@ -65,6 +65,13 @@ void update_player(struct entity *player, struct map *map, struct input input)
 
     printf("direction : %d %d\n", player->dir, reload);
     update_direction(player);
+
+    if (input.inputs[NEXT])
+    {
+        player->pos.x = map->width;
+        player->pos.y = map->height;
+    }
+
 }
 
 void update_map_entities(struct map *map)
