@@ -41,7 +41,7 @@ void update_frame(struct map *map)
         {
             apply_gravity(&map->entities[entity_i], 1);
             update_entity(&map->entities[entity_i], 1);
-            collision(&map->entities[entity_i], map);
+            collision_enemy(&map->entities[entity_i], map);
         }
         else
         {
