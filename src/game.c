@@ -15,6 +15,7 @@ struct GameContext *init_game()
         "maps/lvl4.ez",
         "maps/lvl5.ez",
         "maps/lvl6.ez",
+        "maps/lvl8.ez",
         "maps/lvl7.ez"
     };
 
@@ -27,11 +28,12 @@ struct GameContext *init_game()
         "maps/lvl4_textures/",
         "maps/lvl5_textures/",
         "maps/lvl6_textures/",
+        "maps/lvl8_textures/",
         "maps/lvl7_textures/"
     };
 
     game->cur_map = 0;
-    game->nb_maps = 8;
+    game->nb_maps = 9;
     game->maps = parse_maps(maps, game->nb_maps, textures);
     game->map = game->maps[game->cur_map];
     game->is_playing = 1;
