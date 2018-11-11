@@ -4,10 +4,19 @@
 #include "map.h"
 #include "utils.h"
 #include "vector2.h"
+#include "display.h"
 
 static int jump_value = 1;
 static int jump_count = 0;
 static int reload = RELOAD_TIME;
+static int life = 2;
+static int life_max = 10;
+
+void display_life(struct display *display)
+{
+    display_life_bar(display, life, life_max);
+}
+
 void update_player(struct entity *player, struct map *map, struct input input)
 {
     player->spd.x = 0;
