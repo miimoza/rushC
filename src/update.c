@@ -42,11 +42,14 @@ void update_map_entities(struct map *map)
 {
     for (int i = 0; i < map->nbentities; i++)
     {
+        int xp = map->player.pos.x + 0.5;
+        int yp = map->player.pos.y + 0.5;
+        int x = map->entities[i].pos.x;
+        int y = map->entities[i].pos.y;
+
         switch (map->entities[i].type)
         {
             case BULLET: ;
-                int x = map->entities[i].pos.x;
-                int y = map->entities[i].pos.y;
                 enum blocktype block = get_block(map, map->entities[i].pos);
                 if (block == DBLOCK)
                     map->block[x + map->width * y] = AIR;
@@ -56,6 +59,9 @@ void update_map_entities(struct map *map)
             case ENEMY:
                 break;
             case GUN_PICKUP:
+                if (fti(map->entities[i].pos.x == xp
+                            && fti(map->entities[i].pos.y == yp)))
+                    delete_entity(map, i);
                 break;
             case DOUBLE_JUMP_PICKUP:
                 break;
