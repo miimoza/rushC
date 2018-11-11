@@ -7,9 +7,9 @@ void shot_bullet(struct map *map, struct entity *player)
     struct vector2 speed = {0, 0};
 
     if(player->dir == DIR_LEFT)
-        speed.x = -0.8;
+        speed.x = -0.25;
     else
-        speed.x = 0.8;
+        speed.x = 0.25;
 
     struct entity bullet =
     {
